@@ -23,7 +23,8 @@ body {
   font: inherit;
   font-size: 25px;
   font-weight: 600;
-  color: #3f3500;
+  color: #ffffff;
+  text-shadow: 3px 2px 2px #000000;
   background-color: transparent;
   background-image: url("../img/button_unpressed.png");
   background-repeat: no-repeat;

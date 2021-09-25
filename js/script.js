@@ -13,6 +13,12 @@ function buttonClick() {
       playNote.setAttribute('autoplay', '');
       playNote.volume = 0.05; // Громкость звука. В последствии нужно сделать общий параметр, управляемый ползунком
       document.body.append(playNote);
+
+      const buttonSelection = document.querySelector('button');
+      console.log(buttonSelection);
+      buttonSelection.style.backgroundImage = 'url("../img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
+      buttonSelection.style.paddingLeft = '11px'; // Сдвигаем букву вслед за кнопкой
+      buttonSelection.style.paddingTop = '6px';
     }
   }
 }
@@ -24,6 +30,9 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     audioSelection.forEach((element, i) => {
       audioSelection[i].remove();
     })
+    buttonSelection.style.backgroundImage = ''; // При отпускании кнопки изображение меняется обратно на ненажатую кнопку
+    buttonSelection.style.paddingLeft = ''; // Сдвигаем букву на место
+    buttonSelection.style.paddingTop = '';
   }
 }
 
