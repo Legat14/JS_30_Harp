@@ -3,7 +3,7 @@ const harpNotes = ['C2', 'Db2', 'D2']; // Назначаем все ноты д�
 function buttonClick() {
   if (!event.repeat) { // Если событие уже запущено, то оно не повторяется
                        // Это нужно для того, чтобы избежать многократного проигрывания звука при зажатой клавише
-    if ((event.code == 'KeyQ' && event.type == 'keydown') || event.type == 'mousedown') { // Звук должен заиграть только при нажатии
+    if ((event.code == 'KeyQ' && event.type == 'keydown') || (event.type == 'mousedown' && event.which == 1)) { // Звук должен заиграть только при нажатии
                                                                                          // определенной клавиши или щелчка левой кнопкой
                                                                                          // мыши по кнопке ноты
 
@@ -15,7 +15,6 @@ function buttonClick() {
       document.body.append(playNote);
 
       const buttonSelection = document.querySelector('button');
-      console.log(buttonSelection);
       buttonSelection.style.backgroundImage = 'url("../img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
       buttonSelection.style.paddingLeft = '11px'; // Сдвигаем букву вслед за кнопкой
       buttonSelection.style.paddingTop = '6px';
@@ -25,7 +24,7 @@ function buttonClick() {
 
 function buttonUnclick() { // Удаляем все звуки из html при отпускании клавиши клавиатуры
                            // Это нужно чтобы прервать проигрывание звука и не засорять html
-  if (event.code == 'KeyQ' && event.type == 'keyup') {
+  if ((event.code == 'KeyQ' && event.type == 'keyup') || event.type == 'mouseout') {
     const audioSelection = document.querySelectorAll('audio');
     audioSelection.forEach((element, i) => {
       audioSelection[i].remove();
@@ -36,7 +35,9 @@ function buttonUnclick() { // Удаляем все звуки из html при 
   }
 }
 
+// Слушаем события
 const buttonSelection = document.querySelector('button'); // Выбираем пока что единственную кнопку
-buttonSelection.addEventListener('mousedown', buttonClick); // Слушаем клики мыши, нажатие или отпускание клавиш
+buttonSelection.addEventListener('mousedown', buttonClick); // Слушаем клики мыши, нажатие или отпускание клавиш, уход мыши с кнопки
+buttonSelection.addEventListener('mouseout', buttonUnclick);
 document.addEventListener('keydown', buttonClick);
 document.addEventListener('keyup', buttonUnclick);
