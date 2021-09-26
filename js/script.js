@@ -1,4 +1,4 @@
-const harpNotes = ['C2', 'Db2', 'D2']; // Назначаем все ноты для конкретной гармошки
+const harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2']; // Назначаем все ноты для конкретной гармошки
 
 function buttonClick() {
   if (!event.repeat) { // Если событие уже запущено, то оно не повторяется
@@ -16,8 +16,8 @@ function buttonClick() {
 
       const buttonSelection = document.querySelector('button');
       buttonSelection.style.backgroundImage = 'url("../img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
-      buttonSelection.style.paddingLeft = '11px'; // Сдвигаем букву вслед за кнопкой
-      buttonSelection.style.paddingTop = '6px';
+      buttonSelection.style.paddingLeft = '7px'; // Сдвигаем букву вслед за кнопкой
+      buttonSelection.style.paddingTop = '5px';
     }
   }
 }
@@ -28,7 +28,7 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     const audioSelection = document.querySelectorAll('audio');
     audioSelection.forEach((element, i) => {
       audioSelection[i].remove();
-    })
+    });
     buttonSelection.style.backgroundImage = ''; // При отпускании кнопки изображение меняется обратно на ненажатую кнопку
     buttonSelection.style.paddingLeft = ''; // Сдвигаем букву на место
     buttonSelection.style.paddingTop = '';
@@ -41,3 +41,13 @@ buttonSelection.addEventListener('mousedown', buttonClick); // Слушаем к
 buttonSelection.addEventListener('mouseout', buttonUnclick);
 document.addEventListener('keydown', buttonClick);
 document.addEventListener('keyup', buttonUnclick);
+
+// Создаем разные кнопки - по одной на каждый элемент массива harpNotes
+harpNotes.forEach((element, i) => {
+  console.log(harpNotes[i], i);
+  const newButton = document.createElement('button');
+  newButton.classList.add('button');
+  newButton.innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+  const formSelection = document.body.childNodes[1].childNodes[1];
+  formSelection.append(newButton);
+});

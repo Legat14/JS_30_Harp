@@ -8,18 +8,19 @@ body {
   padding: 0px;
   margin: auto;
   background-color: #c0bb8d;
-  background-image: url("../img/bg/harmonica_bg_01.jpg");
+  /*background-image: url("../img/bg/harmonica_bg_01.jpg"); Фон временно отключен*/
   background-repeat: no-repeat;
 }
 
 .button { /*Кнопка с нотой*/
   width: 40px;
   height: 40px;
-  padding-left: 8px;
-  padding-top: 3px;
+  padding-left: 1px;
+  padding-top: 2px;
   margin: 0px;
   border: none;
   display: flex;
+  justify-content: center;
   font: inherit;
   font-size: 25px;
   font-weight: 600;
