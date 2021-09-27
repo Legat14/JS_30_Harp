@@ -9,16 +9,9 @@ function buttonClick() {
   if (!event.repeat) { // Если событие уже запущено, то оно не повторяется
     // Это нужно для того, чтобы избежать многократного проигрывания звука при зажатой клавише
 
-    if ((hotKeys.includes(event.code) == true && event.type == 'keydown') || (event.type == 'mousedown' && event.which == 1)) { // Звук должен заиграть только при нажатии
-      // определенной клавиши или щелчка левой кнопкой
+    if ((hotKeys.includes(event.code) == true && event.type == 'keydown') || (event.type == 'mousedown' && event.which == 1)) {
+      // Звук должен заиграть только при нажатии определенной клавиши или щелчка левой кнопкой
       // мыши по кнопке ноты
-
-      const playNote = document.createElement('audio'); // Создаем автоматически проигрываемый звук в html
-      playNote.setAttribute('src', 'sounds/C2.mp3');
-      playNote.setAttribute('preload', '');
-      playNote.setAttribute('autoplay', '');
-      playNote.volume = 0.05; // Громкость звука. В последствии нужно сделать общий параметр, управляемый ползунком
-      document.body.append(playNote);
 
       if (event.type == 'mousedown' && event.which == 1) {
         // Находим индекс кнопки, по которой кликнули
@@ -32,6 +25,13 @@ function buttonClick() {
         // Находим индекс кнопки, которую нажали с помощью горячей клавиши
         i = hotKeys.indexOf(event.code);
       }
+
+      const playNote = document.createElement('audio'); // Создаем автоматически проигрываемый звук в html
+      playNote.setAttribute('src', `sounds/${harpNotes[i]}.mp3`);
+      playNote.setAttribute('preload', '');
+      playNote.setAttribute('autoplay', '');
+      playNote.volume = 0.05; // Громкость звука. В последствии нужно сделать общий параметр, управляемый ползунком
+      document.body.append(playNote);
 
       buttonSelection[i].style.backgroundImage = 'url("../img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
       buttonSelection[i].style.paddingLeft = '7px'; // Сдвигаем букву вслед за кнопкой
