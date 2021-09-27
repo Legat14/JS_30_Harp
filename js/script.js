@@ -1,8 +1,10 @@
 // Назначаем все ноты для конкретной гармошки
-const harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3'];
+const harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'E3', 'F3', 'G3',
+'Ab3', 'A3', 'B3', 'C4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'A4', 'Bb4', 'B4', 'C5'];
 // Назначаем горячие клавиши. Каждая горячая клавиша в массиве проигрывает ноту, соответствующую ей
 // по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes
-const hotKeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'KeyA', 'KeyS', 'KeyD', 'KeyF'];
+const hotKeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'KeyA', 'KeyS', 'KeyD', 'KeyF',
+'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash'];
 
 function buttonClick() {
 
@@ -44,10 +46,22 @@ function buttonUnclick() { // Удаляем все звуки из html при 
   // Это нужно чтобы прервать проигрывание звука и не засорять html
 
   if ((hotKeys.includes(event.code) == true && event.type == 'keyup') || event.type == 'mouseout') {
-    const audioSelection = document.querySelectorAll('audio');
+  
+    // При таком удалении аудио все работает хорошо, но игра становится медленнее из-за того, что
+    // Unclick удаляет все аудио. При быстрой игре получается, что следующая кнопка бывает нажата
+    // Раньше предыдущей и тогда при отжатии кнопки удаляются оба звука
+    /*const audioSelection = document.querySelectorAll('audio');
     audioSelection.forEach((element, i) => {
       audioSelection[i].remove();
-    });
+    });*/
+
+    // При таком удалении аудио удаляется только последнее аудио. Это позволяет играть быстро, но
+    // есть баг - если нажать две или более кнопок и одну отпустить, то удалится первый нажаты звук
+    // не зависимо от того, какая клавиша была отпущена
+    audioSelection = document.querySelector('audio');
+    if (audioSelection != null) {
+      audioSelection.remove();
+    }
 
     if (event.type == 'mouseout') {
     // Находим индекс кнопки, по которой кликнули
