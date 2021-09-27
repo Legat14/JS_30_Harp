@@ -1,28 +1,38 @@
 body {
+  width: 1920px;
+  height: 700px;
+  margin: 0px;
   font-family: 'Gemunu Libre', sans-serif;
+  background-color: #000000;
+  background-image: url("../img/bg/harmonica_bg_01.jpg");
+  background-repeat: no-repeat;
 }
 
-.harp { /*Центральный блок с картинкой и кнопками*/
+.highlight { /* Центральный блок с картинкой и кнопками */
   width: 1280px;
   height: 720px;
   padding: 0px;
   margin: auto;
-  background-color: #c0bb8d;
-  /*background-image: url("../img/bg/harmonica_bg_01.jpg"); Фон временно отключен*/
-  background-repeat: no-repeat;
+  margin-top: 90px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 40px;
 }
 
-.button { /*Кнопка с нотой*/
-  width: 40px;
-  height: 40px;
-  padding-left: 1px;
-  padding-top: 2px;
-  margin: 4px;
+.noteButtons {
+  display: block;
+}
+
+.button { /* Кнопка с нотой */
+  width: 60px;
+  height: 60px;
+  padding-left: 0px;
+  padding-top: 0px;
+  margin: 0px;
   border: none;
   display: flex;
   justify-content: center;
   font: inherit;
-  font-size: 25px;
+  font-size: 40px;
   font-weight: 600;
   color: #ffffff;
   text-shadow: 3px 2px 2px #000000;
@@ -30,4 +40,8 @@ body {
   background-image: url("../img/button_unpressed.png");
   background-repeat: no-repeat;
   cursor: pointer;
+  -moz-user-select: none; /* Исключаем возможность случайно выделить буквы на кнопке */
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }

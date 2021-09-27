@@ -35,7 +35,7 @@ function buttonClick() {
       playNote.volume = 0.05; // Громкость звука. В последствии нужно сделать общий параметр, управляемый ползунком
       document.body.append(playNote);
 
-      buttonSelection[i].style.backgroundImage = 'url("../img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
+      buttonSelection[i].style.backgroundImage = 'url("img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
       buttonSelection[i].style.paddingLeft = '7px'; // Сдвигаем букву вслед за кнопкой
       buttonSelection[i].style.paddingTop = '5px';
     }
