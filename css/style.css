@@ -28,7 +28,7 @@ body {
   top: 250px;
   left: 60px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 .button { /* Кнопка с нотой */
