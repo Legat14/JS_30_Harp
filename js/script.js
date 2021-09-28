@@ -1,10 +1,52 @@
 // Назначаем все ноты для конкретной гармошки
 const harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'E3', 'F3', 'G3',
 'Ab3', 'A3', 'B3', 'C4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'A4', 'Bb4', 'B4', 'C5'];
+
 // Назначаем горячие клавиши. Каждая горячая клавиша в массиве проигрывает ноту, соответствующую ей
 // по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes
-const hotKeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'KeyA', 'KeyS', 'KeyD', 'KeyF',
-'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash'];
+const hotKeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'KeyA', 'KeyS', 'KeyD',
+'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma',
+'Period', 'Slash'];
+
+// Вводим значения ширины и высоты поля, на котором будут располагаться кнопки, размеры кнопок и отступы между ними
+// Для быстрого изменения размещения кнопок
+const highlightWidth = 1280;
+const highlightHeight = 720;
+const buttonGap = 6;
+const buttonWidth = 60;
+const buttonHeight = 60;
+
+// Задаем каждой кнопке отступ сверху !!!Работает неправильно. Нужно узнать, что не так с позиционированием!!!
+const keyTopOffset = [80 + 2 * (buttonHeight + buttonGap), 80 + 5 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap),
+80 + 2 * (buttonHeight + buttonGap), 80 + 6 * (buttonHeight + buttonGap), 80 + 5 * (buttonHeight + buttonGap),
+80 + 4 * (buttonHeight + buttonGap), 80 + 2 * (buttonHeight + buttonGap), 80 + 7 * (buttonHeight + buttonGap),
+80 + 6 * (buttonHeight + buttonGap), 80 + 5 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap),
+80 + 2 * (buttonHeight + buttonGap), 80 + 5 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap),
+80 + 2 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap), 80 + 2 * (buttonHeight + buttonGap),
+80 + 5 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap),
+80 + 2 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap), 80 + 1 * (buttonHeight + buttonGap),
+80 + 2 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap), 80 + 1 * (buttonHeight + buttonGap),
+80 + 2 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap), 80 + 0 * (buttonHeight + buttonGap),
+80 + 1 * (buttonHeight + buttonGap), 80 + 2 * (buttonHeight + buttonGap)];
+
+// Задаем каждой кнопке отступ слева
+const keyLeftOffset = [(highlightWidth - buttonGap) / 2 - 5 * buttonWidth - 4 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 5 * buttonWidth - 4 * buttonGap, (highlightWidth - buttonGap) / 2 - 5 * buttonWidth - 4 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 4 * buttonWidth - 3 * buttonGap, (highlightWidth - buttonGap) / 2 - 4 * buttonWidth - 3 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 4 * buttonWidth - 3 * buttonGap, (highlightWidth - buttonGap) / 2 - 4 * buttonWidth - 3 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 3 * buttonWidth - 2 * buttonGap, (highlightWidth - buttonGap) / 2 - 3 * buttonWidth - 2 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 3 * buttonWidth - 2 * buttonGap, (highlightWidth - buttonGap) / 2 - 3 * buttonWidth - 2 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 3 * buttonWidth - 2 * buttonGap, (highlightWidth - buttonGap) / 2 - 2 * buttonWidth - 1 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 2 * buttonWidth - 1 * buttonGap, (highlightWidth - buttonGap) / 2 - 2 * buttonWidth - 1 * buttonGap,
+(highlightWidth - buttonGap) / 2 - 1 * buttonWidth - 0 * buttonGap, (highlightWidth - buttonGap) / 2 - 1 * buttonWidth - 0 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 0 * buttonWidth + 0 * buttonGap, (highlightWidth + buttonGap) / 2 + 0 * buttonWidth + 0 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 0 * buttonWidth + 0 * buttonGap, (highlightWidth + buttonGap) / 2 + 1 * buttonWidth + 1 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 1 * buttonWidth + 1 * buttonGap, (highlightWidth + buttonGap) / 2 + 2 * buttonWidth + 2 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 2 * buttonWidth + 2 * buttonGap, (highlightWidth + buttonGap) / 2 + 2 * buttonWidth + 2 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 3 * buttonWidth + 3 * buttonGap, (highlightWidth + buttonGap) / 2 + 3 * buttonWidth + 3 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 3 * buttonWidth + 3 * buttonGap, (highlightWidth + buttonGap) / 2 + 4 * buttonWidth + 4 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 4 * buttonWidth + 4 * buttonGap, (highlightWidth + buttonGap) / 2 + 4 * buttonWidth + 4 * buttonGap,
+(highlightWidth + buttonGap) / 2 + 4 * buttonWidth + 4 * buttonGap];
 
 function buttonClick() {
 
@@ -87,6 +129,8 @@ harpNotes.forEach((element, i) => {
   const newButton = document.createElement('button');
   newButton.classList.add('button');
   newButton.innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+  newButton.style.top = `${keyTopOffset[i]}px`;
+  newButton.style.left = `${keyLeftOffset[i]}px`;
   const formSelection = document.body.childNodes[1].childNodes[1];
   formSelection.append(newButton);
 });

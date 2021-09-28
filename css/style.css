@@ -14,11 +14,12 @@ body {
   padding: 0px;
   margin: auto;
   margin-top: 90px;
+  position: relative;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 40px;
 }
 
-.noteButtons {
+.noteButtons { /* Класс для невидимой формы, в которой находятся все кнопки */
   display: block;
 }
 
@@ -28,6 +29,7 @@ body {
   padding-left: 0px;
   padding-top: 0px;
   margin: 0px;
+  position: absolute;
   border: none;
   display: flex;
   justify-content: center;
