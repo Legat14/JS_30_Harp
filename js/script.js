@@ -131,78 +131,90 @@ function buttonUnclick() { // Удаляем все звуки из html при 
 
 function radioButtonSelected() {
   radioButtonSelection.forEach((element, i) => {
-    if (radioButtonSelection[i].checked) {
-      playVolume = radioButtonSelection[i].value;
-      console.clear();
-      console.log('Volume level - ', playVolume * 10);
-      for (let j = i; j < 10; j++) {
-        document.body.children[0].children[1].children[j].children[1].style.backgroundColor = "";
-        document.body.children[0].children[1].children[j].children[1].style.boxShadow = "";
+      if (radioButtonSelection[i].checked) {
+        playVolume = radioButtonSelection[i].value;
+        console.clear();
+        console.log('Volume level - ', playVolume * 10);
+        for (let j = i; j < 10; j++) {
+          document.body.children[0].children[1].children[j].children[1].style.backgroundColor = "";
+          document.body.children[0].children[1].children[j].children[1].style.boxShadow = "";
         }
-      for (k = i - 1; k >= 0; k--) {
-        if (k <= 3) { // Проверка на зеленый цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#20ff02";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #4eff48";
+        for (k = i - 1; k >= 0; k--) {
+          if (k <= 3) { // Проверка на зеленый цвет
+            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#20ff02";
+            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #4eff48";
+          } else if (k <= 6) { // Проверка на желтый цвет
+            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ffd102";
+            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffe677";
+          } else if (k <= 7) { // Проверка на оранжевый цвет
+            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff9102";
+            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffb048";
+          } else if (k <= 8) { // Проверка на красный цвет
+            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff0202";
+            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ff4848";
+          }
         }
-        else if (k <= 6) { // Проверка на желтый цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ffd102";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffe677";
+        // Создаем звук щелчка при переключении громкости
+        const playClick = document.createElement('audio');
+        playClick.setAttribute('src', 'sounds/Click.mp3');
+        playClick.setAttribute('preload', '');
+        playClick.setAttribute('autoplay', '');
+        playClick.volume = 0.4;
+        document.body.append(playClick);
+
+        // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
+        setTimeout(() => {
+            audioSelection = document.querySelector('audio');
+            if (audioSelection != null) {
+              audioSelection.remove();
+            }
+          }, 100); // Длительность звука в миллисекундах
         }
-         else if (k <= 7) { // Проверка на оранжевый цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff9102";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffb048";
-        }
-        else if (k <= 8) { // Проверка на красный цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff0202";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ff4848";
-        }
-      }
-    }
+      });
+  }
+
+  // Создаем разные кнопки - по одной на каждый элемент массива harpNotes
+  harpNotes.forEach((element, i) => {
+    const newButton = document.createElement('button');
+    newButton.classList.add('button');
+    newButton.innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+    newButton.style.top = `${keyTopOffset[i]}px`;
+    newButton.style.left = `${keyLeftOffset[i]}px`;
+    const formSelection = document.body.childNodes[1].childNodes[1];
+    formSelection.append(newButton);
   });
-}
 
-// Создаем разные кнопки - по одной на каждый элемент массива harpNotes
-harpNotes.forEach((element, i) => {
-  const newButton = document.createElement('button');
-  newButton.classList.add('button');
-  newButton.innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
-  newButton.style.top = `${keyTopOffset[i]}px`;
-  newButton.style.left = `${keyLeftOffset[i]}px`;
-  const formSelection = document.body.childNodes[1].childNodes[1];
-  formSelection.append(newButton);
-});
+  // Слушаем события
 
-// Слушаем события
+  // Выбираем все кнопки
+  const buttonSelection = document.querySelectorAll('button');
 
-// Выбираем все кнопки
-const buttonSelection = document.querySelectorAll('button');
+  // Слушаем клики мыши по кнопкам и уход мыши с кнопки
+  buttonSelection.forEach((element, i) => {
+    buttonSelection[i].addEventListener('mousedown', buttonClick);
+    buttonSelection[i].addEventListener('mouseout', buttonUnclick);
+  });
 
-// Слушаем клики мыши по кнопкам и уход мыши с кнопки
-buttonSelection.forEach((element, i) => {
-  buttonSelection[i].addEventListener('mousedown', buttonClick);
-  buttonSelection[i].addEventListener('mouseout', buttonUnclick);
-});
+  // Слушаем нажатие или отпускание клавиш
+  document.addEventListener('keydown', buttonClick);
+  document.addEventListener('keyup', buttonUnclick);
 
-// Слушаем нажатие или отпускание клавиш
-document.addEventListener('keydown', buttonClick);
-document.addEventListener('keyup', buttonUnclick);
+  // Задаем радиокнопку по умолчанию
+  let selectedRadioButtonIndex = 4;
 
-// Задаем радиокнопку по умолчанию
-let selectedRadioButtonIndex = 4;
+  // Выбираем все радиокнопки управления звуком
+  const radioButtonSelection = document.querySelectorAll('.volumeButton');
 
-// Выбираем все радиокнопки управления звуком
-const radioButtonSelection = document.querySelectorAll('.volumeButton');
+  // Назначаем выбранную радиокнопку по умолчанию
+  radioButtonSelection[selectedRadioButtonIndex].setAttribute("checked", "");
 
-// Назначаем выбранную радиокнопку по умолчанию
-radioButtonSelection[selectedRadioButtonIndex].setAttribute("checked", "");
+  // Задаем громкость клавиш по умолчанию в соответствии с выбранной радиокнопкой
+  let playVolume = radioButtonSelection[selectedRadioButtonIndex].value;
+  radioButtonSelected();
 
-// Задаем громкость клавиш по умолчанию в соответствии с выбранной радиокнопкой
-let playVolume = radioButtonSelection[selectedRadioButtonIndex].value;
-radioButtonSelected();
+  // Слушаем выбор радиокнопки.
+  radioButtonSelection.forEach((element, i) => {
+    radioButtonSelection[i].addEventListener('change', radioButtonSelected);
+  });
 
-// Слушаем выбор радиокнопки.
-radioButtonSelection.forEach((element, i) => {
-  radioButtonSelection[i].addEventListener('change', radioButtonSelected);
-});
-
-//document.addEventListener('keydown', () => console.log(event.code)); // Проверка кодов клавиш
+  //document.addEventListener('keydown', () => console.log(event.code)); // Проверка кодов клавиш
