@@ -113,8 +113,8 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     if (event.type == 'mouseout') {
       // Находим индекс кнопки, по которой кликнули
       const targetClick = event.target;
-      for (i = 0; i < document.body.childNodes[1].childNodes[1].length; i++) {
-        if (document.body.childNodes[1].childNodes[1].children[i] == targetClick) {
+      for (i = 0; i < document.body.children[0].children[0].length; i++) {
+        if (document.body.children[0].children[0].children[i] == targetClick) {
           break;
         }
       }
@@ -135,6 +135,28 @@ function radioButtonSelected() {
       playVolume = radioButtonSelection[i].value;
       console.clear();
       console.log('Volume level - ', playVolume * 10);
+      for (let j = i; j < 10; j++) {
+        document.body.children[0].children[1].children[j].children[1].style.backgroundColor = "";
+        document.body.children[0].children[1].children[j].children[1].style.boxShadow = "";
+        }
+      for (k = i - 1; k >= 0; k--) {
+        if (k <= 3) { // Проверка на зеленый цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#20ff02";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #4eff48";
+        }
+        else if (k <= 6) { // Проверка на желтый цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ffd102";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffe677";
+        }
+         else if (k <= 7) { // Проверка на оранжевый цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff9102";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffb048";
+        }
+        else if (k <= 8) { // Проверка на красный цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff0202";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ff4848";
+        }
+      }
     }
   });
 }
@@ -174,8 +196,9 @@ const radioButtonSelection = document.querySelectorAll('.volumeButton');
 // Назначаем выбранную радиокнопку по умолчанию
 radioButtonSelection[selectedRadioButtonIndex].setAttribute("checked", "");
 
-// Задаем громкость клавиш по умолчанию (должна соответствовать выбранной радиокнопке)
+// Задаем громкость клавиш по умолчанию в соответствии с выбранной радиокнопкой
 let playVolume = radioButtonSelection[selectedRadioButtonIndex].value;
+radioButtonSelected();
 
 // Слушаем выбор радиокнопки.
 radioButtonSelection.forEach((element, i) => {

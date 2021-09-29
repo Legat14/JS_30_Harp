@@ -2,7 +2,6 @@ body {
   width: 1920px;
   height: 700px;
   margin: 0px;
-  font-family: 'Gemunu Libre', sans-serif;
   background-color: #000000;
   background-image: url("../img/bg/harmonica_bg_01.jpg");
   background-repeat: no-repeat;
@@ -25,10 +24,77 @@ body {
 
 .volumeButtons {
   position: absolute;
-  top: 250px;
+  top: 215px;
   left: 60px;
+  padding: 15px 20px 20px;
   display: flex;
   flex-direction: column-reverse;
+  justify-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffffff;
+  border-radius: 15px;
+}
+
+.volumeButtons label input {
+  display: none;
+}
+
+.volumeButtonDiv {
+  width: 40px;
+  height: 10px;
+  margin-top: 8px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.greenVolumeButton {
+  background-color: #15461c;
+}
+
+.yellowVolumeButton {
+  background-color: #454615;
+}
+
+.orangeVolumeButton {
+  background-color: #463315;
+}
+
+.redVolumeButton {
+  background-color: #581a1a;
+}
+
+.volumeButtons label input:checked + .greenVolumeButton {
+  background-color: #20ff02;
+  box-shadow: 0px 0px 5px 2px #4eff48;
+}
+
+.volumeButtons label input:checked + .yellowVolumeButton {
+  background-color: #ffd102;
+  box-shadow: 0px 0px 5px 2px #ffe677;
+}
+
+.volumeButtons label input:checked + .orangeVolumeButton {
+  background-color: #ff9102;
+  box-shadow: 0px 0px 5px 2px #ffb048;
+}
+
+.volumeButtons label input:checked + .redVolumeButton {
+  background-color: #ff0202;
+  box-shadow: 0px 0px 5px 2px #ff4848;
+}
+
+/* Выделение регулятора громкости */
+.volumeButtons label input:hover + .volumeButtonDiv {
+  margin: 6px -2px -2px -2px;
+  border: 2px solid #9e9c33;
+  box-shadow: 0px 0px 3px 1px #dbdbc0;
+}
+
+.volumeButtons p {
+margin: 0px 0px 12px 3px;
+font-family: 'Gemunu Libre', sans-serif;
+font-size: 25px;
+color: #ffffff;
 }
 
 .button { /* Кнопка с нотой */
@@ -41,7 +107,7 @@ body {
   border: none;
   display: flex;
   justify-content: center;
-  font: inherit;
+  font-family: 'Gemunu Libre', sans-serif;
   font-size: 40px;
   font-weight: 600;
   color: #ffffff;
