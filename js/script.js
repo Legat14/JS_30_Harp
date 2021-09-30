@@ -1,7 +1,9 @@
 'use strict';
 
 // Выбираем строй гармошки из C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B
-const harpType = 'C';
+const harpTypeOf = ['G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb']
+let harpTypeIndex = 5;
+const harpType = harpTypeOf[harpTypeIndex];
 
 // Назначаем все ноты, в зависимости от выбранной гармошки harpType
 let harpNotes;
@@ -69,7 +71,7 @@ const buttonGap = 9;
 const buttonWidth = 60;
 const buttonHeight = 60;
 
-// Задаем каждой кнопке отступ сверху !!!Работает неправильно. Нужно узнать, что не так с позиционированием!!!
+// Задаем каждой кнопке отступ сверху
 const keyTopOffset = [80 + 2 * (buttonHeight + buttonGap), 80 + 5 * (buttonHeight + buttonGap), 80 + 4 * (buttonHeight + buttonGap),
   80 + 2 * (buttonHeight + buttonGap), 80 + 6 * (buttonHeight + buttonGap), 80 + 5 * (buttonHeight + buttonGap),
   80 + 4 * (buttonHeight + buttonGap), 80 + 2 * (buttonHeight + buttonGap), 80 + 7 * (buttonHeight + buttonGap),
@@ -226,10 +228,27 @@ function radioButtonSelected() {
       });
   }
 
+  // Выбираем следующую гармошку
+  function changeButtonUpClick() {
+    if (harpTypeIndex < 11) {
+      harpTypeIndex++;
+  }
+    console.log(harpTypeIndex, harpTypeOf[harpTypeIndex], harpType);
+  }
+
+  // Выбираем предыдущую гармошку
+  function changeButtonDownClick() {
+    if (harpTypeIndex > 0) {
+    harpTypeIndex--;
+    }
+    console.log(harpTypeIndex, harpTypeOf[harpTypeIndex], harpType);
+  }
+
   // Создаем разные кнопки - по одной на каждый элемент массива harpNotes
   harpNotes.forEach((element, i) => {
     const newButton = document.createElement('button');
-    newButton.classList.add('button');
+    newButton.classList.add('noteButton');
+    newButton.setAttribute('type', 'button');
     newButton.innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
     newButton.style.top = `${keyTopOffset[i]}px`;
     newButton.style.left = `${keyLeftOffset[i]}px`;
@@ -239,8 +258,8 @@ function radioButtonSelected() {
 
   // Слушаем события
 
-  // Выбираем все кнопки
-  const buttonSelection = document.querySelectorAll('button');
+  // Выбираем все нотные кнопки
+  const buttonSelection = document.querySelectorAll('.noteButton');
 
   // Слушаем клики мыши по кнопкам и уход мыши с кнопки
   buttonSelection.forEach((element, i) => {
@@ -270,4 +289,9 @@ function radioButtonSelected() {
     radioButtonSelection[i].addEventListener('change', radioButtonSelected);
   });
 
-  //document.addEventListener('keydown', () => console.log(event.code)); // Проверка кодов клавиш
+  // Выбираем кнопки смены гармошки
+  const changeHarpButtonSelection = document.querySelectorAll('.changeHarpButton');
+
+  // Слушаем клики мыши по кнопкам смены гармошки
+    changeHarpButtonSelection[0].addEventListener('mousedown', changeButtonUpClick);
+    changeHarpButtonSelection[1].addEventListener('mousedown', changeButtonDownClick);

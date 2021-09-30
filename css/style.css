@@ -97,7 +97,7 @@ font-size: 25px;
 color: #ffffff;
 }
 
-.button { /* Кнопка с нотой */
+.noteButton { /* Кнопка с нотой */
   width: 60px;
   height: 60px;
   padding-left: 0px;
