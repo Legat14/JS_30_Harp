@@ -146,7 +146,7 @@ function buttonClick() {
 function buttonUnclick() { // Удаляем все звуки из html при отпускании клавиши клавиатуры
   // Это нужно чтобы прервать проигрывание звука и не засорять html
 
-  if ((hotKeys.includes(event.code) == true && event.type == 'keyup') || event.type == 'mouseout') {
+  if ((hotKeys.includes(event.code) == true && event.type == 'keyup') || event.type == 'mouseout' || event.type == 'mouseup') {
 
     // При таком удалении аудио все работает хорошо, но игра становится медленнее из-за того, что
     // Unclick удаляет все аудио. При быстрой игре получается, что следующая кнопка бывает нажата
@@ -165,7 +165,7 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     }
 
     let i = 0;
-    if (event.type == 'mouseout') {
+    if (event.type == 'mouseout' || event.type == 'mouseup') {
       // Находим индекс кнопки, по которой кликнули
       const targetClick = event.target;
       for (i = 0; i < document.body.children[0].children[0].length; i++) {
@@ -265,6 +265,7 @@ function radioButtonSelected() {
   buttonSelection.forEach((element, i) => {
     buttonSelection[i].addEventListener('mousedown', buttonClick);
     buttonSelection[i].addEventListener('mouseout', buttonUnclick);
+    buttonSelection[i].addEventListener('mouseup', buttonUnclick);
   });
 
   // Слушаем нажатие или отпускание клавиш
