@@ -3,65 +3,85 @@
 // Выбираем строй гармошки из C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B
 const harpTypeOf = ['G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb']
 let harpTypeIndex = 5;
-const harpType = harpTypeOf[harpTypeIndex];
+let harpType = harpTypeOf[harpTypeIndex];
+let harpNotes;
+let buttonSelection;
 
 // Назначаем все ноты, в зависимости от выбранной гармошки harpType
-let harpNotes;
-switch(harpType) {
-  case 'C':
-    harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'E3', 'F3', 'G3',
-    'Ab3', 'A3', 'B3', 'C4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'A4', 'Bb4', 'B4', 'C5'];
-    break;
-  case 'Db':
-    harpNotes = ['Db2', 'D2', 'Eb2', 'F2', 'Gb2', 'G2', 'Ab2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'F3', 'Gb3', 'Ab3',
-    'A3', 'Bb3', 'C4', 'Db4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'Bb4', 'B4', 'C5', 'Db5'];
-    break;
-  case 'D':
-    harpNotes = ['D2', 'Eb2', 'E2', 'Gb2', 'G2', 'Ab2', 'A2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'Gb3', 'G3', 'A3',
-    'Bb3', 'B3', 'Db4', 'D4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'B4', 'C5', 'Db5', 'D5'];
-    break;
-  case 'Eb':
-    harpNotes = ['Eb2', 'E2', 'F2', 'G2', 'Ab2', 'A2', 'Bb2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'G3', 'Ab3', 'Bb3',
-    'B3', 'C4', 'D4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'C5', 'Db5', 'D5', 'Eb5'];
-    break;
-  case 'E':
-    harpNotes = ['E2', 'F2', 'Gb2', 'Ab2', 'A2', 'Bb2', 'B2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'Ab3', 'A3', 'B3',
-    'C4', 'Db4', 'Eb4', 'E4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'Db5', 'D5', 'Eb5', 'E5'];
-    break;
-  case 'F':
-    harpNotes = ['F2', 'Gb2', 'G2', 'A2', 'Bb2', 'B2', 'C3', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'A3', 'Bb3', 'C4',
-    'Db4', 'D4', 'E4', 'F4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'D5', 'Eb5', 'E5', 'F5'];
-    break;
-  case 'Gb':
-    harpNotes = ['Gb2', 'G2', 'Ab2', 'Bb2', 'B2', 'C3', 'Db3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'Ab3', 'Bb3', 'B3', 'Db4',
-    'D4', 'Eb4', 'F4', 'Gb4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'Db5', 'Eb5', 'E5', 'F5', 'Gb5'];
-    break;
-  case 'G':
-    harpNotes = ['G1', 'Ab1', 'A1', 'B1', 'C2', 'Db2', 'D2', 'D2', 'Eb2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'B2', 'C3', 'D3',
-    'Eb3', 'E3', 'Gb3', 'G3', 'A3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'E4', 'F4', 'Gb4', 'G4'];
-    break;
-  case 'Ab':
-    harpNotes = ['Ab1', 'A1', 'Bb1', 'C2', 'Db2', 'D2', 'Eb2', 'Eb2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'C3', 'Db3', 'Eb3',
-    'E3', 'F3', 'G3', 'Ab3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4'];
-    break;
-  case 'A':
-    harpNotes = ['A1', 'Bb1', 'B1', 'Db2', 'D2', 'Eb2', 'E2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'Db3', 'D3', 'E3',
-    'F3', 'Gb3', 'Ab3', 'A3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'Gb4', 'G4', 'Ab4', 'A4'];
-    break;
-  case 'Bb':
-    harpNotes = ['Bb1', 'B1', 'C2', 'D2', 'Eb2', 'E2', 'F2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'D3', 'Eb3', 'F3',
-    'Gb3', 'G3', 'A3', 'Bb3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'G4', 'Ab4', 'A4', 'Bb4'];
-  case 'B':
-    harpNotes = ['B1', 'C2', 'Db2', 'Eb2', 'E2', 'F2', 'Gb2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'Eb3', 'E3', 'Gb3',
-    'G3', 'Ab3', 'Bb3', 'B3', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'Ab4', 'A4', 'Bb4', 'B4'];
-    break;
+function choiceOfHarp() {
+  switch (harpType) {
+    case 'C':
+      harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'E3', 'F3', 'G3',
+        'Ab3', 'A3', 'B3', 'C4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'A4', 'Bb4', 'B4', 'C5'
+      ];
+      break;
+    case 'Db':
+      harpNotes = ['Db2', 'D2', 'Eb2', 'F2', 'Gb2', 'G2', 'Ab2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'F3', 'Gb3', 'Ab3',
+        'A3', 'Bb3', 'C4', 'Db4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'Bb4', 'B4', 'C5', 'Db5'
+      ];
+      break;
+    case 'D':
+      harpNotes = ['D2', 'Eb2', 'E2', 'Gb2', 'G2', 'Ab2', 'A2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'Gb3', 'G3', 'A3',
+        'Bb3', 'B3', 'Db4', 'D4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'B4', 'C5', 'Db5', 'D5'
+      ];
+      break;
+    case 'Eb':
+      harpNotes = ['Eb2', 'E2', 'F2', 'G2', 'Ab2', 'A2', 'Bb2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'G3', 'Ab3', 'Bb3',
+        'B3', 'C4', 'D4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'C5', 'Db5', 'D5', 'Eb5'
+      ];
+      break;
+    case 'E':
+      harpNotes = ['E2', 'F2', 'Gb2', 'Ab2', 'A2', 'Bb2', 'B2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'Ab3', 'A3', 'B3',
+        'C4', 'Db4', 'Eb4', 'E4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'Db5', 'D5', 'Eb5', 'E5'
+      ];
+      break;
+    case 'F':
+      harpNotes = ['F2', 'Gb2', 'G2', 'A2', 'Bb2', 'B2', 'C3', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'A3', 'Bb3', 'C4',
+        'Db4', 'D4', 'E4', 'F4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'D5', 'Eb5', 'E5', 'F5'
+      ];
+      break;
+    case 'Gb':
+      harpNotes = ['Gb2', 'G2', 'Ab2', 'Bb2', 'B2', 'C3', 'Db3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'Ab3', 'Bb3', 'B3', 'Db4',
+        'D4', 'Eb4', 'F4', 'Gb4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'Db5', 'Eb5', 'E5', 'F5', 'Gb5'
+      ];
+      break;
+    case 'G':
+      harpNotes = ['G1', 'Ab1', 'A1', 'B1', 'C2', 'Db2', 'D2', 'D2', 'Eb2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'B2', 'C3', 'D3',
+        'Eb3', 'E3', 'Gb3', 'G3', 'A3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'E4', 'F4', 'Gb4', 'G4'
+      ];
+      break;
+    case 'Ab':
+      harpNotes = ['Ab1', 'A1', 'Bb1', 'C2', 'Db2', 'D2', 'Eb2', 'Eb2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'C3', 'Db3', 'Eb3',
+        'E3', 'F3', 'G3', 'Ab3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'F4', 'Gb4', 'G4', 'Ab4'
+      ];
+      break;
+    case 'A':
+      harpNotes = ['A1', 'Bb1', 'B1', 'Db2', 'D2', 'Eb2', 'E2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'Db3', 'D3', 'E3',
+        'F3', 'Gb3', 'Ab3', 'A3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'Gb4', 'G4', 'Ab4', 'A4'
+      ];
+      break;
+    case 'Bb':
+      harpNotes = ['Bb1', 'B1', 'C2', 'D2', 'Eb2', 'E2', 'F2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'D3', 'Eb3', 'F3',
+        'Gb3', 'G3', 'A3', 'Bb3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'G4', 'Ab4', 'A4', 'Bb4'
+      ];
+      break;
+    case 'B':
+      harpNotes = ['B1', 'C2', 'Db2', 'Eb2', 'E2', 'F2', 'Gb2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'Eb3', 'E3', 'Gb3',
+        'G3', 'Ab3', 'Bb3', 'B3', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'Ab4', 'A4', 'Bb4', 'B4'
+      ];
+      break;
+  }
 }
+
+// Запускаем функцию в первый раз для выбора нот для гармошки по умолчанию
+choiceOfHarp();
 
 // Назначаем горячие клавиши. Каждая горячая клавиша в массиве проигрывает ноту, соответствующую ей
 // по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes
 const hotKeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'KeyA', 'KeyS', 'KeyD',
   'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma',
-  'Period', 'Slash'];
+  'Period', 'Slash'
+];
 
 // Вводим значения ширины и высоты поля, на котором будут располагаться кнопки, размеры кнопок и отступы между ними
 // Для быстрого изменения размещения кнопок
@@ -186,65 +206,108 @@ function buttonUnclick() { // Удаляем все звуки из html при 
 
 function radioButtonSelected() {
   radioButtonSelection.forEach((element, i) => {
-      if (radioButtonSelection[i].checked) {
-        playVolume = radioButtonSelection[i].value;
-        console.clear();
-        console.log('Volume level - ', playVolume * 10);
-        for (let j = i; j < 10; j++) {
-          document.body.children[0].children[1].children[j].children[1].style.backgroundColor = "";
-          document.body.children[0].children[1].children[j].children[1].style.boxShadow = "";
+    if (radioButtonSelection[i].checked) {
+      playVolume = radioButtonSelection[i].value;
+      console.clear();
+      console.log('Volume level - ', playVolume * 10);
+      for (let j = i; j < 10; j++) {
+        document.body.children[0].children[1].children[j].children[1].style.backgroundColor = "";
+        document.body.children[0].children[1].children[j].children[1].style.boxShadow = "";
+      }
+      for (let k = i - 1; k >= 0; k--) {
+        if (k <= 3) { // Проверка на зеленый цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#17c200";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #5db85a";
+        } else if (k <= 6) { // Проверка на желтый цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#dbb300";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #c2af5e";
+        } else if (k <= 7) { // Проверка на оранжевый цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#df7e00";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #c09256";
+        } else if (k <= 8) { // Проверка на красный цвет
+          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#c00000";
+          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #9b4646";
         }
-        for (let k = i - 1; k >= 0; k--) {
-          if (k <= 3) { // Проверка на зеленый цвет
-            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#20ff02";
-            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #4eff48";
-          } else if (k <= 6) { // Проверка на желтый цвет
-            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ffd102";
-            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffe677";
-          } else if (k <= 7) { // Проверка на оранжевый цвет
-            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff9102";
-            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ffb048";
-          } else if (k <= 8) { // Проверка на красный цвет
-            document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#ff0202";
-            document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #ff4848";
-          }
+      }
+      // Создаем звук щелчка при переключении громкости
+      const playClick = document.createElement('audio');
+      playClick.setAttribute('src', 'sounds/Click.mp3');
+      playClick.setAttribute('preload', '');
+      playClick.setAttribute('autoplay', '');
+      playClick.volume = 0.4;
+      document.body.append(playClick);
+
+      // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
+      setTimeout(() => {
+        let audioSelection = document.querySelector('audio');
+        if (audioSelection != null) {
+          audioSelection.remove();
         }
-        // Создаем звук щелчка при переключении громкости
-        const playClick = document.createElement('audio');
-        playClick.setAttribute('src', 'sounds/Click.mp3');
-        playClick.setAttribute('preload', '');
-        playClick.setAttribute('autoplay', '');
-        playClick.volume = 0.4;
-        document.body.append(playClick);
-
-        // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
-        setTimeout(() => {
-            let audioSelection = document.querySelector('audio');
-            if (audioSelection != null) {
-              audioSelection.remove();
-            }
-          }, 100); // Длительность звука в миллисекундах
-        }
-      });
-  }
-
-  // Выбираем следующую гармошку
-  function changeButtonUpClick() {
-    if (harpTypeIndex < 11) {
-      harpTypeIndex++;
-  }
-    console.log(harpTypeIndex, harpTypeOf[harpTypeIndex], harpType);
-  }
-
-  // Выбираем предыдущую гармошку
-  function changeButtonDownClick() {
-    if (harpTypeIndex > 0) {
-    harpTypeIndex--;
+      }, 100); // Длительность звука в миллисекундах
     }
-    console.log(harpTypeIndex, harpTypeOf[harpTypeIndex], harpType);
-  }
+  });
+}
 
-  // Создаем разные кнопки - по одной на каждый элемент массива harpNotes
+// Выбираем следующую гармошку
+function changeButtonUpClick() {
+  if (harpTypeIndex < 11) {
+    harpTypeIndex++;
+    harpType = harpTypeOf[harpTypeIndex];
+    buttonsRemove();
+    choiceOfHarp();
+    buttonsCreation();
+    console.clear();
+    console.log('Selected harmonica - ', harpType);
+
+    // Создаем звук щелчка при переключении гармошки
+    const playClick = document.createElement('audio');
+    playClick.setAttribute('src', 'sounds/Click.mp3');
+    playClick.setAttribute('preload', '');
+    playClick.setAttribute('autoplay', '');
+    playClick.volume = 0.4;
+    document.body.append(playClick);
+
+    // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
+    setTimeout(() => {
+      let audioSelection = document.querySelector('audio');
+      if (audioSelection != null) {
+        audioSelection.remove();
+      }
+    }, 100); // Длительность звука в миллисекундах
+  }
+}
+
+// Выбираем предыдущую гармошку
+function changeButtonDownClick() {
+  if (harpTypeIndex > 0) {
+    harpTypeIndex--;
+    harpType = harpTypeOf[harpTypeIndex];
+    buttonsRemove();
+    choiceOfHarp();
+    buttonsCreation();
+    console.clear();
+    console.log('Selected harmonica - ', harpType);
+
+    // Создаем звук щелчка при переключении гармошки
+    const playClick = document.createElement('audio');
+    playClick.setAttribute('src', 'sounds/Click.mp3');
+    playClick.setAttribute('preload', '');
+    playClick.setAttribute('autoplay', '');
+    playClick.volume = 0.4;
+    document.body.append(playClick);
+
+    // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
+    setTimeout(() => {
+      let audioSelection = document.querySelector('audio');
+      if (audioSelection != null) {
+        audioSelection.remove();
+      }
+    }, 100); // Длительность звука в миллисекундах
+  }
+}
+
+// Функция по созданию разных кнопок - по одной на каждый элемент массива harpNotes
+function buttonsCreation() {
   harpNotes.forEach((element, i) => {
     const newButton = document.createElement('button');
     newButton.classList.add('noteButton');
@@ -256,43 +319,66 @@ function radioButtonSelected() {
     formSelection.append(newButton);
   });
 
-  // Слушаем события
-
   // Выбираем все нотные кнопки
-  const buttonSelection = document.querySelectorAll('.noteButton');
+  buttonSelection = document.querySelectorAll('.noteButton');
 
   // Слушаем клики мыши по кнопкам и уход мыши с кнопки
   buttonSelection.forEach((element, i) => {
     buttonSelection[i].addEventListener('mousedown', buttonClick);
     buttonSelection[i].addEventListener('mouseout', buttonUnclick);
     buttonSelection[i].addEventListener('mouseup', buttonUnclick);
-  });
+});
 
-  // Слушаем нажатие или отпускание клавиш
-  document.addEventListener('keydown', buttonClick);
-  document.addEventListener('keyup', buttonUnclick);
+  // Запускаем функцию показа ключа гармошки
+  showHarpChoice();
+}
 
-  // Задаем радиокнопку по умолчанию
-  let selectedRadioButtonIndex = 4;
+// Удаляем все нотные кнопки перед созданием новых кнопок для гармошки с другой тональностью
+function buttonsRemove() {
+  buttonSelection.forEach((element, i) => {
+    buttonSelection[i].remove();
+});
+}
 
-  // Выбираем все радиокнопки управления звуком
-  const radioButtonSelection = document.querySelectorAll('.volumeButton');
+// Прописываем ключ выбранной гармошки
+function showHarpChoice() {
+  const harpWindow = document.querySelector('.changeHarpShow');
+  if (harpWindow.children[0]) {
+  harpWindow.children[0].remove();
+  }
+  harpWindow.insertAdjacentHTML ('afterbegin', `<p>${harpType}</p>`);
+}
 
-  // Назначаем выбранную радиокнопку по умолчанию
-  radioButtonSelection[selectedRadioButtonIndex].setAttribute("checked", "");
+// Запускаем функцию создания кнопок при загрузке страницы для создания кнопок гармошки по умолчанию
+buttonsCreation();
 
-  // Задаем громкость клавиш по умолчанию в соответствии с выбранной радиокнопкой
-  let playVolume = radioButtonSelection[selectedRadioButtonIndex].value;
-  radioButtonSelected();
+// Слушаем события
 
-  // Слушаем выбор радиокнопки.
-  radioButtonSelection.forEach((element, i) => {
-    radioButtonSelection[i].addEventListener('change', radioButtonSelected);
-  });
+// Слушаем нажатие или отпускание клавиш
+document.addEventListener('keydown', buttonClick);
+document.addEventListener('keyup', buttonUnclick);
 
-  // Выбираем кнопки смены гармошки
-  const changeHarpButtonSelection = document.querySelectorAll('.changeHarpButton');
+// Задаем радиокнопку по умолчанию
+let selectedRadioButtonIndex = 4;
 
-  // Слушаем клики мыши по кнопкам смены гармошки
-    changeHarpButtonSelection[0].addEventListener('mousedown', changeButtonUpClick);
-    changeHarpButtonSelection[1].addEventListener('mousedown', changeButtonDownClick);
+// Выбираем все радиокнопки управления звуком
+const radioButtonSelection = document.querySelectorAll('.volumeButton');
+
+// Назначаем выбранную радиокнопку по умолчанию
+radioButtonSelection[selectedRadioButtonIndex].setAttribute("checked", "");
+
+// Задаем громкость клавиш по умолчанию в соответствии с выбранной радиокнопкой
+let playVolume = radioButtonSelection[selectedRadioButtonIndex].value;
+radioButtonSelected();
+
+// Слушаем выбор радиокнопки.
+radioButtonSelection.forEach((element, i) => {
+  radioButtonSelection[i].addEventListener('change', radioButtonSelected);
+});
+
+// Выбираем кнопки смены гармошки
+const changeHarpButtonSelection = document.querySelectorAll('.changeHarpButton');
+
+// Слушаем клики мыши по кнопкам смены гармошки
+changeHarpButtonSelection[0].addEventListener('mousedown', changeButtonUpClick);
+changeHarpButtonSelection[1].addEventListener('mousedown', changeButtonDownClick);

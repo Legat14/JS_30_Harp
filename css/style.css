@@ -26,7 +26,7 @@ body {
   position: absolute;
   top: 215px;
   left: 60px;
-  padding: 15px 20px 20px;
+  padding: 15px 15px 22px;
   display: flex;
   flex-direction: column-reverse;
   justify-items: center;
@@ -40,10 +40,10 @@ body {
 }
 
 .volumeButtonDiv {
-  width: 40px;
-  height: 10px;
-  margin-top: 8px;
-  border-radius: 7px;
+  width: 35px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -64,37 +64,42 @@ body {
 }
 
 .volumeButtons label input:checked + .greenVolumeButton {
-  background-color: #20ff02;
-  box-shadow: 0px 0px 5px 2px #4eff48;
+  background-color: #17c200;
+  box-shadow: 0px 0px 5px 2px #5db85a;
 }
 
 .volumeButtons label input:checked + .yellowVolumeButton {
-  background-color: #ffd102;
-  box-shadow: 0px 0px 5px 2px #ffe677;
+  background-color: #dbb300;
+  box-shadow: 0px 0px 5px 2px #c2af5e;
 }
 
 .volumeButtons label input:checked + .orangeVolumeButton {
-  background-color: #ff9102;
-  box-shadow: 0px 0px 5px 2px #ffb048;
+  background-color: #df7e00;
+  box-shadow: 0px 0px 5px 2px #c09256;
 }
 
 .volumeButtons label input:checked + .redVolumeButton {
-  background-color: #ff0202;
-  box-shadow: 0px 0px 5px 2px #ff4848;
+  background-color: #c00000;
+  box-shadow: 0px 0px 5px 2px #9b4646;
 }
 
 /* Выделение регулятора громкости */
 .volumeButtons label input:hover + .volumeButtonDiv {
-  margin: 6px -2px -2px -2px;
+  margin: 5px -2px -2px -2px;
   border: 2px solid #9e9c33;
   box-shadow: 0px 0px 3px 1px #dbdbc0;
+  border-radius: 6px;
 }
 
 .volumeButtons p {
-margin: 0px 0px 12px 3px;
+margin: 0px 0px 12px 1px;
 font-family: 'Gemunu Libre', sans-serif;
 font-size: 25px;
 color: #ffffff;
+-moz-user-select: none; /* Исключаем возможность случайно выделить буквы на кнопке */
+-khtml-user-select: none;
+-webkit-user-select: none;
+user-select: none;
 }
 
 .noteButton { /* Кнопка с нотой */
@@ -120,4 +125,73 @@ color: #ffffff;
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+.changeHarpButtons {
+  position: absolute;
+  top: 240px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.changeHarpButton {
+  width: 65px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-image: url("../img/change_button.png");
+  background-size: 65px 28px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.changeHarpButtonDown {
+  transform: rotate(180deg);
+}
+
+/* Нажатие на стрелочку */
+.changeHarpButton:active {
+  background-size: 60px 24px;
+}
+
+/* Выделение стрелочки */
+.changeHarpButton:hover {
+  background-image: url("../img/change_button_hover.png");
+  background-position: center center;
+}
+
+.changeHarpButtons p {
+  margin: 6px 0px 0px;
+  font-family: 'Gemunu Libre', sans-serif;
+  font-size: 25px;
+  color: #ffffff;
+  -moz-user-select: none; /* Исключаем возможность случайно выделить буквы на кнопке */
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.changeHarpShow {
+  width: 55px;
+  height: 55px;
+  margin-top: 6px;
+  margin-bottom: 20px;
+  display: flex;
+  color: #ffffff;
+  font-family: 'Gemunu Libre', sans-serif;
+  font-size: 42px;
+  font-weight: 300;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffffff;
+  border-radius: 15px;
+}
+
+.changeHarpShow p {
+  margin: 0px;
 }
