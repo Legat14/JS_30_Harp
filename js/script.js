@@ -6,6 +6,7 @@ let harpTypeIndex = 5;
 let harpType = harpTypeOf[harpTypeIndex];
 let harpNotes;
 let buttonSelection;
+let animationDirection;
 
 // Назначаем все ноты, в зависимости от выбранной гармошки harpType
 function choiceOfHarp() {
@@ -256,28 +257,30 @@ setTimeout(() => {
 // Выбираем следующую гармошку
 function changeButtonUpClick() {
   if (harpTypeIndex < 11) {
+    animationDirection = 'Up';
     harpTypeIndex++;
     harpType = harpTypeOf[harpTypeIndex];
     buttonsRemove();
     choiceOfHarp();
-    buttonsCreation();
+    buttonsCreation(animationDirection);
+    soundOfClick();
     console.clear();
     console.log('Selected harmonica - ', harpType);
-    soundOfClick();
   }
 }
 
 // Выбираем предыдущую гармошку
 function changeButtonDownClick() {
   if (harpTypeIndex > 0) {
+    animationDirection = 'Down';
     harpTypeIndex--;
     harpType = harpTypeOf[harpTypeIndex];
     buttonsRemove();
     choiceOfHarp();
-    buttonsCreation();
+    buttonsCreation(animationDirection);
+    soundOfClick();
     console.clear();
     console.log('Selected harmonica - ', harpType);
-    soundOfClick();
   }
 }
 
@@ -305,7 +308,7 @@ function buttonsCreation() {
 });
 
   // Запускаем функцию показа ключа гармошки
-  showHarpChoice();
+  showHarpChoice(animationDirection);
 }
 
 // Удаляем все нотные кнопки перед созданием новых кнопок для гармошки с другой тональностью
@@ -316,12 +319,21 @@ function buttonsRemove() {
 }
 
 // Прописываем ключ выбранной гармошки
-function showHarpChoice() {
+function showHarpChoice(animationDirection) {
   const harpWindow = document.querySelector('.changeHarpShow');
   if (harpWindow.children[0]) {
-  harpWindow.children[0].remove();
+  harpWindow.children[0].classList.add(`remove${animationDirection}`);
+  setTimeout(() => {
+    harpWindow.children[0].remove();
+    harpWindow.insertAdjacentHTML ('afterbegin', `<p>${harpType}</p>`);
+    harpWindow.children[0].classList.add(`create${animationDirection}`);
+  }, 150);
+  setTimeout(() => {
+    harpWindow.children[0].classList.remove(`create${animationDirection}`);
+  }, 300);
+  } else {
+    harpWindow.insertAdjacentHTML ('afterbegin', `<p>${harpType}</p>`);
   }
-  harpWindow.insertAdjacentHTML ('afterbegin', `<p>${harpType}</p>`);
 }
 
 // Запускаем функцию создания кнопок при загрузке страницы для создания кнопок гармошки по умолчанию

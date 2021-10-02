@@ -182,6 +182,7 @@ user-select: none;
   margin-top: 20px;
   margin-bottom: 6px;
   display: flex;
+  flex-direction: column;
   color: #ffffff;
   font-family: 'Gemunu Libre', sans-serif;
   align-items: center;
@@ -195,4 +196,68 @@ user-select: none;
   margin: 0px;
   font-size: 42px;
   font-weight: 300;
+}
+
+.removeUp {
+  animation-duration: 0.15s;
+  animation-name: upAnimation;
+}
+
+@keyframes upAnimation {
+  from {
+    margin-top: 0px;
+    transform: scale(1, 1);
+}
+  to {
+    margin-top: -45px;
+    transform: scale(0.9, 0.01);
+  }
+}
+
+.createUp {
+  animation-duration: 0.15s;
+  animation-name: fromDownAnimation;
+}
+
+@keyframes fromDownAnimation {
+  from {
+    margin-top: 45px;
+    transform: scale(0.9, 0.01);
+}
+  to {
+    margin-top: 0px;
+    transform: scale(1, 1);
+  }
+}
+
+.removeDown {
+  animation-duration: 0.15s;
+  animation-name: downAnimation;
+}
+
+@keyframes downAnimation {
+  from {
+    margin-top: 0px;
+    transform: scale(1, 1);
+}
+  to {
+    margin-top: 45px;
+    transform: scale(0.9, 0.01);
+  }
+}
+
+.createDown {
+  animation-duration: 0.15s;
+  animation-name: fromUpAnimation;
+}
+
+@keyframes fromUpAnimation {
+  from {
+    margin-top: -45px;
+    transform: scale(0.9, 0.01);
+}
+  to {
+    margin-top: 0px;
+    transform: scale(1, 1);
+  }
 }
