@@ -229,23 +229,28 @@ function radioButtonSelected() {
           document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #9b4646";
         }
       }
-      // Создаем звук щелчка при переключении громкости
-      const playClick = document.createElement('audio');
-      playClick.setAttribute('src', 'sounds/Click.mp3');
-      playClick.setAttribute('preload', '');
-      playClick.setAttribute('autoplay', '');
-      playClick.volume = 0.4;
-      document.body.append(playClick);
-
-      // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
-      setTimeout(() => {
-        let audioSelection = document.querySelector('audio');
-        if (audioSelection != null) {
-          audioSelection.remove();
-        }
-      }, 100); // Длительность звука в миллисекундах
+      soundOfClick();
     }
   });
+}
+
+// Звук щелчка при переключении громкости или смене гармошки
+function soundOfClick() {
+// Создаем звук щелчка при переключении громкости
+const playClick = document.createElement('audio');
+playClick.setAttribute('src', 'sounds/Click.mp3');
+playClick.setAttribute('preload', '');
+playClick.setAttribute('autoplay', '');
+playClick.volume = 0.4;
+document.body.append(playClick);
+
+// Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
+setTimeout(() => {
+  let audioSelection = document.querySelector('audio');
+  if (audioSelection != null) {
+    audioSelection.remove();
+  }
+}, 100); // Длительность звука в миллисекунда
 }
 
 // Выбираем следующую гармошку
@@ -258,22 +263,7 @@ function changeButtonUpClick() {
     buttonsCreation();
     console.clear();
     console.log('Selected harmonica - ', harpType);
-
-    // Создаем звук щелчка при переключении гармошки
-    const playClick = document.createElement('audio');
-    playClick.setAttribute('src', 'sounds/Click.mp3');
-    playClick.setAttribute('preload', '');
-    playClick.setAttribute('autoplay', '');
-    playClick.volume = 0.4;
-    document.body.append(playClick);
-
-    // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
-    setTimeout(() => {
-      let audioSelection = document.querySelector('audio');
-      if (audioSelection != null) {
-        audioSelection.remove();
-      }
-    }, 100); // Длительность звука в миллисекундах
+    soundOfClick();
   }
 }
 
@@ -287,22 +277,7 @@ function changeButtonDownClick() {
     buttonsCreation();
     console.clear();
     console.log('Selected harmonica - ', harpType);
-
-    // Создаем звук щелчка при переключении гармошки
-    const playClick = document.createElement('audio');
-    playClick.setAttribute('src', 'sounds/Click.mp3');
-    playClick.setAttribute('preload', '');
-    playClick.setAttribute('autoplay', '');
-    playClick.volume = 0.4;
-    document.body.append(playClick);
-
-    // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
-    setTimeout(() => {
-      let audioSelection = document.querySelector('audio');
-      if (audioSelection != null) {
-        audioSelection.remove();
-      }
-    }, 100); // Длительность звука в миллисекундах
+    soundOfClick();
   }
 }
 

@@ -165,9 +165,10 @@ user-select: none;
 }
 
 .changeHarpButtons p {
-  margin: 6px 0px 0px;
+  margin: 0px 0px 6px;
   font-family: 'Gemunu Libre', sans-serif;
   font-size: 25px;
+  font-weight: 300;
   color: #ffffff;
   -moz-user-select: none; /* Исключаем возможность случайно выделить буквы на кнопке */
   -khtml-user-select: none;
@@ -178,13 +179,11 @@ user-select: none;
 .changeHarpShow {
   width: 55px;
   height: 55px;
-  margin-top: 6px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 6px;
   display: flex;
   color: #ffffff;
   font-family: 'Gemunu Libre', sans-serif;
-  font-size: 42px;
-  font-weight: 300;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
@@ -194,4 +193,6 @@ user-select: none;
 
 .changeHarpShow p {
   margin: 0px;
+  font-size: 42px;
+  font-weight: 300;
 }
