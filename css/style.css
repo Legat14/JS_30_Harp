@@ -1,16 +1,50 @@
 body {
+  margin: 0px;
   display: flex;
   overflow: hidden;
 }
 
-.background {
+.backgroundConteiner {
   position: absolute;
+  display: flex;
+  flex-direction: row;
+}
+
+.background {
   width: 1920px;
   height: 1080px;
   margin: 0px;
   background-color: #000000;
-  background-image: url("../img/bg/harmonica_bg_01.jpg");
+  background-image: url("../img/bg/harmonica_bg_5.jpg");
   background-repeat: no-repeat;
+}
+
+.bgUp {
+  animation-duration: 0.5s;
+  animation-name: bgUp;
+}
+
+@keyframes bgUp {
+  from {
+    margin-left: 0px;
+}
+  to {
+    margin-left: -1920px;
+  }
+}
+
+.bgDown {
+  animation-duration: 0.5s;
+  animation-name: bgDown;
+}
+
+@keyframes bgDown {
+  from {
+    margin-left: -1920px;
+}
+  to {
+    margin-left: 0px;
+  }
 }
 
 .highlight { /* Центральный блок с картинкой и кнопками */

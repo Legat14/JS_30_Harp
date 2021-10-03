@@ -80,8 +80,9 @@ choiceOfHarp();
 // Назначаем горячие клавиши. Каждая горячая клавиша в массиве проигрывает ноту, соответствующую ей
 // по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes
 const hotKeys = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'KeyA', 'KeyS', 'KeyD', 'KeyF',
-'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO',
-'KeyP', 'BracketLeft'];
+  'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO',
+  'KeyP', 'BracketLeft'
+];
 
 // Вводим значения ширины и высоты поля, на котором будут располагаться кнопки, размеры кнопок и отступы между ними
 // Для быстрого изменения размещения кнопок
@@ -236,21 +237,43 @@ function radioButtonSelected() {
 
 // Звук щелчка при переключении громкости или смене гармошки
 function soundOfClick() {
-// Создаем звук щелчка при переключении громкости
-const playClick = document.createElement('audio');
-playClick.setAttribute('src', 'sounds/Click.mp3');
-playClick.setAttribute('preload', '');
-playClick.setAttribute('autoplay', '');
-playClick.volume = 0.4;
-document.body.append(playClick);
+  // Создаем звук щелчка при переключении громкости
+  const playClick = document.createElement('audio');
+  playClick.setAttribute('src', 'sounds/Click.mp3');
+  playClick.setAttribute('preload', '');
+  playClick.setAttribute('autoplay', '');
+  playClick.volume = 0.4;
+  document.body.append(playClick);
 
-// Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
-setTimeout(() => {
-  let audioSelection = document.querySelector('audio');
-  if (audioSelection != null) {
-    audioSelection.remove();
+  // Удаляем звук щелчка после проигрывания, чтобы не мешал потом удалять звуки нот
+  setTimeout(() => {
+    let audioSelection = document.querySelector('audio');
+    if (audioSelection != null) {
+      audioSelection.remove();
+    }
+  }, 100); // Длительность звука в миллисекунда
+}
+
+// Функция смены фона
+function changeBackground(animationDirection) {
+  const newBackground = document.createElement('div');
+  const backgroundDiv = document.body.children[0];
+  newBackground.classList.add('background');
+  newBackground.style.backgroundImage = `url("../img/bg/harmonica_bg_${harpTypeIndex}.jpg`;
+  let childrenIndex;
+  if (animationDirection == "Up") {
+    backgroundDiv.append(newBackground);
+    childrenIndex = 0;
+  } else {
+    backgroundDiv.prepend(newBackground);
+    childrenIndex = 1;
   }
-}, 100); // Длительность звука в миллисекунда
+    backgroundDiv.children[0].classList.add(`bg${animationDirection}`);
+
+  setTimeout(() => {
+      backgroundDiv.children[childrenIndex].remove();
+      backgroundDiv.children[0].classList.remove(`bg${animationDirection}`);
+    }, 500);
 }
 
 // Выбираем следующую гармошку
@@ -263,6 +286,7 @@ function changeButtonUpClick() {
     choiceOfHarp();
     buttonsCreation(animationDirection);
     soundOfClick();
+    changeBackground(animationDirection);
     console.clear();
     console.log('Selected harmonica - ', harpType);
   }
@@ -278,6 +302,7 @@ function changeButtonDownClick() {
     choiceOfHarp();
     buttonsCreation(animationDirection);
     soundOfClick();
+    changeBackground(animationDirection);
     console.clear();
     console.log('Selected harmonica - ', harpType);
   }
@@ -304,7 +329,7 @@ function buttonsCreation() {
     buttonSelection[i].addEventListener('mousedown', buttonClick);
     buttonSelection[i].addEventListener('mouseout', buttonUnclick);
     buttonSelection[i].addEventListener('mouseup', buttonUnclick);
-});
+  });
 
   // Запускаем функцию показа ключа гармошки
   showHarpChoice(animationDirection);
@@ -314,24 +339,24 @@ function buttonsCreation() {
 function buttonsRemove() {
   buttonSelection.forEach((element, i) => {
     buttonSelection[i].remove();
-});
+  });
 }
 
 // Прописываем ключ выбранной гармошки
 function showHarpChoice(animationDirection) {
   const harpWindow = document.querySelector('.changeHarpShow');
   if (harpWindow.children[0]) {
-  harpWindow.children[0].classList.add(`remove${animationDirection}`);
-  setTimeout(() => {
-    harpWindow.children[0].remove();
-    harpWindow.insertAdjacentHTML ('afterbegin', `<p>${harpType}</p>`);
-    harpWindow.children[0].classList.add(`create${animationDirection}`);
-  }, 150);
-  setTimeout(() => {
-    harpWindow.children[0].classList.remove(`create${animationDirection}`);
-  }, 300);
+    harpWindow.children[0].classList.add(`remove${animationDirection}`);
+    setTimeout(() => {
+      harpWindow.children[0].remove();
+      harpWindow.insertAdjacentHTML('afterbegin', `<p>${harpType}</p>`);
+      harpWindow.children[0].classList.add(`create${animationDirection}`);
+    }, 150);
+    setTimeout(() => {
+      harpWindow.children[0].classList.remove(`create${animationDirection}`);
+    }, 300);
   } else {
-    harpWindow.insertAdjacentHTML ('afterbegin', `<p>${harpType}</p>`);
+    harpWindow.insertAdjacentHTML('afterbegin', `<p>${harpType}</p>`);
   }
 }
 
