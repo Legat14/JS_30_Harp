@@ -1,7 +1,7 @@
 'use strict';
 
 // Выбираем строй гармошки из C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B
-const harpTypeOf = ['G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb']
+const harpTypeOf = ['G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb'];
 let harpTypeIndex = 5;
 let harpType = harpTypeOf[harpTypeIndex];
 let harpNotes;
@@ -79,10 +79,9 @@ choiceOfHarp();
 
 // Назначаем горячие клавиши. Каждая горячая клавиша в массиве проигрывает ноту, соответствующую ей
 // по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes
-const hotKeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'KeyA', 'KeyS', 'KeyD',
-  'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma',
-  'Period', 'Slash'
-];
+const hotKeys = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'KeyA', 'KeyS', 'KeyD', 'KeyF',
+'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO',
+'KeyP', 'BracketLeft'];
 
 // Вводим значения ширины и высоты поля, на котором будут располагаться кнопки, размеры кнопок и отступы между ними
 // Для быстрого изменения размещения кнопок
@@ -139,8 +138,8 @@ function buttonClick() {
       if (event.type == 'mousedown' && event.which == 1) {
         // Находим индекс кнопки, по которой кликнули
         const targetClick = event.target;
-        for (i = 0; i < document.body.childNodes[1].childNodes[1].length; i++) {
-          if (document.body.childNodes[1].childNodes[1].children[i] == targetClick) {
+        for (i = 0; i < document.body.children[1].children[0].length; i++) {
+          if (document.body.children[1].children[0].children[i] == targetClick) {
             break;
           }
         }
@@ -189,8 +188,8 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     if (event.type == 'mouseout' || event.type == 'mouseup') {
       // Находим индекс кнопки, по которой кликнули
       const targetClick = event.target;
-      for (i = 0; i < document.body.children[0].children[0].length; i++) {
-        if (document.body.children[0].children[0].children[i] == targetClick) {
+      for (i = 0; i < document.body.children[1].children[0].length; i++) {
+        if (document.body.children[1].children[0].children[i] == targetClick) {
           break;
         }
       }
@@ -212,22 +211,22 @@ function radioButtonSelected() {
       console.clear();
       console.log('Volume level - ', playVolume * 10);
       for (let j = i; j < 10; j++) {
-        document.body.children[0].children[1].children[j].children[1].style.backgroundColor = "";
-        document.body.children[0].children[1].children[j].children[1].style.boxShadow = "";
+        document.body.children[1].children[1].children[j].children[1].style.backgroundColor = "";
+        document.body.children[1].children[1].children[j].children[1].style.boxShadow = "";
       }
       for (let k = i - 1; k >= 0; k--) {
         if (k <= 3) { // Проверка на зеленый цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#17c200";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #5db85a";
+          document.body.children[1].children[1].children[k].children[1].style.backgroundColor = "#17c200";
+          document.body.children[1].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #5db85a";
         } else if (k <= 6) { // Проверка на желтый цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#dbb300";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #c2af5e";
+          document.body.children[1].children[1].children[k].children[1].style.backgroundColor = "#dbb300";
+          document.body.children[1].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #c2af5e";
         } else if (k <= 7) { // Проверка на оранжевый цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#df7e00";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #c09256";
+          document.body.children[1].children[1].children[k].children[1].style.backgroundColor = "#df7e00";
+          document.body.children[1].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #c09256";
         } else if (k <= 8) { // Проверка на красный цвет
-          document.body.children[0].children[1].children[k].children[1].style.backgroundColor = "#c00000";
-          document.body.children[0].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #9b4646";
+          document.body.children[1].children[1].children[k].children[1].style.backgroundColor = "#c00000";
+          document.body.children[1].children[1].children[k].children[1].style.boxShadow = "0px 0px 5px 2px #9b4646";
         }
       }
       soundOfClick();
@@ -293,7 +292,7 @@ function buttonsCreation() {
     newButton.innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
     newButton.style.top = `${keyTopOffset[i]}px`;
     newButton.style.left = `${keyLeftOffset[i]}px`;
-    const formSelection = document.body.childNodes[1].childNodes[1];
+    const formSelection = document.body.children[1].children[0];
     formSelection.append(newButton);
   });
 

@@ -1,6 +1,12 @@
 body {
+  display: flex;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
   width: 1920px;
-  height: 700px;
+  height: 1080px;
   margin: 0px;
   background-color: #000000;
   background-image: url("../img/bg/harmonica_bg_01.jpg");
@@ -100,6 +106,10 @@ color: #ffffff;
 -khtml-user-select: none;
 -webkit-user-select: none;
 user-select: none;
+}
+
+button:focus {
+  outline: none;
 }
 
 .noteButton { /* Кнопка с нотой */
