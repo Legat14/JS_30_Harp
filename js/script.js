@@ -7,10 +7,11 @@ let harpType = harpTypeOf[harpTypeIndex];
 let harpNotes;
 let buttonSelection;
 let animationDirection;
+const holes = document.querySelector('.holes');
 
 // Назначаем все ноты, в зависимости от выбранной гармошки harpType
 function choiceOfHarp() {
-  switch (harpType) {
+  switch(harpType) {
     case 'C':
       harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'E3', 'F3', 'G3',
         'Ab3', 'A3', 'B3', 'C4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'A4', 'Bb4', 'B4', 'C5'
@@ -78,10 +79,17 @@ function choiceOfHarp() {
 choiceOfHarp();
 
 // Назначаем горячие клавиши. Каждая горячая клавиша в массиве проигрывает ноту, соответствующую ей
-// по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes
+// по индексу в массиве harpKeys. То есть hotKey[0] проигрывает ноту harpNotes[0]
 const hotKeys = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'KeyA', 'KeyS', 'KeyD', 'KeyF',
   'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO',
   'KeyP', 'BracketLeft'
+];
+
+// Назначаем способы получения каждой ноты. Значения массива должны соответствовать нотам
+// То есть wayToGetNote[0] соответствует ноте harpNotes[0] и реальному способу получения данной ноты на губной гармошке
+// Сейчас это нужно для того чтобы правильно нажимались кнопки с номерами отверстий. В последствии может пригодиться при расшифровке файлов
+const wayToGetNote = ['+1', '--1', '-1', '+2', '---2', '--2', '-2', '+3', '----3', '---3', '--3', '-3', '+4', '--4', '-4', '+5', '-5',
+'+6', '--6', '-6', '-7', '+7', '-8', '++8', '+8', '-9', '++9', '+9', '-10', '+++10', '++10', '+10'
 ];
 
 // Вводим значения ширины и высоты поля, на котором будут располагаться кнопки, размеры кнопок и отступы между ними
@@ -158,8 +166,25 @@ function buttonClick() {
       document.body.append(playNote);
 
       buttonSelection[i].style.backgroundImage = 'url("img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
-      buttonSelection[i].style.paddingLeft = '7px'; // Сдвигаем букву вслед за кнопкой
-      buttonSelection[i].style.paddingTop = '5px';
+      buttonSelection[i].style.paddingTop = '5px'; // Сдвигаем букву вслед за кнопкой
+      buttonSelection[i].style.paddingLeft = '7px';
+
+      let hole = wayToGetNote[i].slice(-1); // Находим номер отверстия, из которого получается звук
+      if (hole == 0) {
+        hole = 10;
+      }
+
+      let direction;
+      if (wayToGetNote[i].slice(0, 1) == '+') {
+        direction = 'blow';
+      } else {
+        direction = 'breath';
+      }
+
+      holes.children[hole - 1].style.backgroundImage = `url("img/hole_${direction}.png")`; // Меняем отображение отверстия на нажатое
+                                                                                           // В зависимости от направления воздуха
+      holes.children[hole - 1].childNodes[0].style.marginTop = '-1px'; // Сдвигаем цифру вслед за отверстием
+      holes.children[hole - 1].childNodes[0].style.marginLeft = '1px';
     }
   }
 }
@@ -202,6 +227,15 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     buttonSelection[i].style.backgroundImage = ''; // При отпускании кнопки изображение меняется обратно на ненажатую кнопку
     buttonSelection[i].style.paddingLeft = ''; // Сдвигаем букву на место
     buttonSelection[i].style.paddingTop = '';
+
+    let hole = wayToGetNote[i].slice(-1); // Находим номер отверстия, из которого получается звук
+      if (hole == 0) {
+        hole = 10;
+      }
+
+      holes.children[hole - 1].style.backgroundImage = ''; // Меняем отображение отверстия обратно на нейтральное
+      holes.children[hole - 1].childNodes[0].style.marginTop = ''; // Сдвигаем цифру на место
+      holes.children[hole - 1].childNodes[0].style.marginLeft = '';
   }
 }
 
@@ -259,7 +293,7 @@ function changeBackground(animationDirection) {
   const newBackground = document.createElement('div');
   const backgroundDiv = document.body.children[0];
   newBackground.classList.add('background');
-  newBackground.style.backgroundImage = `url("../img/bg/harmonica_bg_${harpTypeIndex}.jpg`;
+  newBackground.style.backgroundImage = `url("img/bg/harmonica_bg_${harpTypeIndex}.jpg`;
   let childrenIndex;
   if (animationDirection == "Up") {
     backgroundDiv.append(newBackground);

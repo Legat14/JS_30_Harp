@@ -146,7 +146,7 @@ button:focus {
   outline: none;
 }
 
-.noteButton { /* Кнопка с нотой */
+.noteButton {
   width: 60px;
   height: 60px;
   padding-left: 0px;
@@ -188,6 +188,7 @@ button:focus {
   background-color: transparent;
   background-image: url("../img/change_button.png");
   background-size: 65px 28px;
+  background-repeat: no-repeat;
   background-position: center center;
   background-repeat: no-repeat;
   cursor: pointer;
@@ -205,6 +206,7 @@ button:focus {
 /* Выделение стрелочки */
 .changeHarpButton:hover {
   background-image: url("../img/change_button_hover.png");
+  background-repeat: no-repeat;
   background-position: center center;
 }
 
@@ -305,3 +307,35 @@ button:focus {
     transform: scale(1, 1);
   }
 }
+
+.holes {
+  margin: 284px 0px 0px 203px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  text-shadow: 3px 2px 2px #000000;
+  background-repeat: no-repeat;
+  -moz-user-select: none; /* Исключаем возможность случайно выделить буквы на кнопке */
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+ .holes div {
+  width: 66px;
+  height: 66px;
+  margin: 0px 0px 0px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../img/hole_nuetral.png");
+  background-repeat: no-repeat;
+  }
+
+  .holes p {
+    margin: -9px 0px 0px -7px;
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+  }
