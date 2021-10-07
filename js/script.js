@@ -239,12 +239,12 @@ function buttonUnclick() { // Удаляем все звуки из html при 
   }
 }
 
-function radioButtonSelected() {
+function volumeSelection() {
   radioButtonSelection.forEach((element, i) => {
     if (radioButtonSelection[i].checked) {
       playVolume = radioButtonSelection[i].value;
       console.clear();
-      console.log('Volume level - ', playVolume * 10);
+      console.log('Volume level - ', i + 1);
       for (let j = i; j < 10; j++) {
         document.body.children[1].children[1].children[j].children[1].style.backgroundColor = "";
         document.body.children[1].children[1].children[j].children[1].style.boxShadow = "";
@@ -268,6 +268,54 @@ function radioButtonSelected() {
     }
   });
 }
+
+
+
+
+
+
+
+
+
+// Работает, если не изменять громкость мышкой. После изменения мышкой - ломается.
+// Возможно нужно переписать функцию подсвечивания кнопок volumeSelection на использование функции setVolume
+function volumeSelectionHotKeys() {
+  if (event.code == 'ArrowUp' || event.code == 'NumpadAdd' || event.code == 'Equal' || event.code == 'ArrowDown' ||
+  event.code == 'NumpadSubtract' || event.code == 'Minus') {
+    if (event.code == 'ArrowUp' || event.code == 'NumpadAdd' || event.code == 'Equal') {
+    for (let i = 0; i < 10; i++) {
+      if (radioButtonSelection[i].checked) {
+        if (i != 9) {
+          radioButtonSelection[i].checked = false;
+          radioButtonSelection[i + 1].checked = true;
+          break;
+      }
+    }
+  }
+      } else if (event.code == 'ArrowDown' || event.code == 'NumpadSubtract' || event.code == 'Minus') {
+        for (let i = 0; i < 10; i++) {
+          if (radioButtonSelection[i].checked) {
+            if (i != 0) {
+              radioButtonSelection[i].checked = false;
+              radioButtonSelection[i - 1].checked = true;
+              break;
+        }
+      }
+  }
+}
+  volumeSelection();
+}
+}
+
+
+
+
+
+
+
+
+
+
 
 // Звук щелчка при переключении громкости или смене гармошки
 function soundOfClick() {
@@ -401,6 +449,7 @@ buttonsCreation();
 
 // Слушаем нажатие или отпускание клавиш
 document.addEventListener('keydown', buttonClick);
+document.addEventListener('keydown', volumeSelectionHotKeys);
 document.addEventListener('keyup', buttonUnclick);
 
 // Задаем радиокнопку по умолчанию
@@ -414,11 +463,11 @@ radioButtonSelection[selectedRadioButtonIndex].setAttribute("checked", "");
 
 // Задаем громкость клавиш по умолчанию в соответствии с выбранной радиокнопкой
 let playVolume = radioButtonSelection[selectedRadioButtonIndex].value;
-radioButtonSelected();
+volumeSelection();
 
 // Слушаем выбор радиокнопки.
 radioButtonSelection.forEach((element, i) => {
-  radioButtonSelection[i].addEventListener('change', radioButtonSelected);
+  radioButtonSelection[i].addEventListener('change', volumeSelection);
 });
 
 // Выбираем кнопки смены гармошки
