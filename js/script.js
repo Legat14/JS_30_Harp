@@ -11,7 +11,7 @@ const holes = document.querySelector('.holes');
 
 // Назначаем все ноты, в зависимости от выбранной гармошки harpType
 function choiceOfHarp() {
-  switch(harpType) {
+  switch (harpType) {
     case 'C':
       harpNotes = ['C2', 'Db2', 'D2', 'E2', 'F2', 'Gb2', 'G2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'E3', 'F3', 'G3',
         'Ab3', 'A3', 'B3', 'C4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'A4', 'Bb4', 'B4', 'C5'
@@ -89,8 +89,12 @@ const hotKeys = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma'
 // То есть wayToGetNote[0] соответствует ноте harpNotes[0] и реальному способу получения данной ноты на губной гармошке
 // Сейчас это нужно для того чтобы правильно нажимались кнопки с номерами отверстий. В последствии может пригодиться при расшифровке файлов
 const wayToGetNote = ['+1', '--1', '-1', '+2', '---2', '--2', '-2', '+3', '----3', '---3', '--3', '-3', '+4', '--4', '-4', '+5', '-5',
-'+6', '--6', '-6', '-7', '+7', '-8', '++8', '+8', '-9', '++9', '+9', '-10', '+++10', '++10', '+10'
+  '+6', '--6', '-6', '-7', '+7', '-8', '++8', '+8', '-9', '++9', '+9', '-10', '+++10', '++10', '+10'
 ];
+
+// Назначаем соответствие между горячими цифровыми клавишами и уровнем звука
+const hotVolumeKeysDigits = ['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', ];
+const hotVolumeKeysNums = ['Numpad1', 'Numpad2', 'Numpad3', 'Numpad4', 'Numpad5', 'Numpad6', 'Numpad7', 'Numpad8', 'Numpad9', 'Numpad0', ];
 
 // Вводим значения ширины и высоты поля, на котором будут располагаться кнопки, размеры кнопок и отступы между ними
 // Для быстрого изменения размещения кнопок
@@ -182,7 +186,7 @@ function buttonClick() {
       }
 
       holes.children[hole - 1].style.backgroundImage = `url("img/hole_${direction}.png")`; // Меняем отображение отверстия на нажатое
-                                                                                           // В зависимости от направления воздуха
+      // В зависимости от направления воздуха
       holes.children[hole - 1].childNodes[0].style.marginTop = '-1px'; // Сдвигаем цифру вслед за отверстием
       holes.children[hole - 1].childNodes[0].style.marginLeft = '1px';
     }
@@ -229,13 +233,13 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     buttonSelection[i].style.paddingTop = '';
 
     let hole = wayToGetNote[i].slice(-1); // Находим номер отверстия, из которого получается звук
-      if (hole == 0) {
-        hole = 10;
-      }
+    if (hole == 0) {
+      hole = 10;
+    }
 
-      holes.children[hole - 1].style.backgroundImage = ''; // Меняем отображение отверстия обратно на нейтральное
-      holes.children[hole - 1].childNodes[0].style.marginTop = ''; // Сдвигаем цифру на место
-      holes.children[hole - 1].childNodes[0].style.marginLeft = '';
+    holes.children[hole - 1].style.backgroundImage = ''; // Меняем отображение отверстия обратно на нейтральное
+    holes.children[hole - 1].childNodes[0].style.marginTop = ''; // Сдвигаем цифру на место
+    holes.children[hole - 1].childNodes[0].style.marginLeft = '';
   }
 }
 
@@ -269,53 +273,43 @@ function volumeSelection() {
   });
 }
 
-
-
-
-
-
-
-
-
-// Работает, если не изменять громкость мышкой. После изменения мышкой - ломается.
-// Возможно нужно переписать функцию подсвечивания кнопок volumeSelection на использование функции setVolume
+// Изменение громкости горячими клавишами + / - и стрелками
 function volumeSelectionHotKeys() {
   if (event.code == 'ArrowUp' || event.code == 'NumpadAdd' || event.code == 'Equal' || event.code == 'ArrowDown' ||
-  event.code == 'NumpadSubtract' || event.code == 'Minus') {
+    event.code == 'NumpadSubtract' || event.code == 'Minus') {
     if (event.code == 'ArrowUp' || event.code == 'NumpadAdd' || event.code == 'Equal') {
-    for (let i = 0; i < 10; i++) {
-      if (radioButtonSelection[i].checked) {
-        if (i != 9) {
-          radioButtonSelection[i].checked = false;
-          radioButtonSelection[i + 1].checked = true;
-          break;
-      }
-    }
-  }
-      } else if (event.code == 'ArrowDown' || event.code == 'NumpadSubtract' || event.code == 'Minus') {
-        for (let i = 0; i < 10; i++) {
-          if (radioButtonSelection[i].checked) {
-            if (i != 0) {
-              radioButtonSelection[i].checked = false;
-              radioButtonSelection[i - 1].checked = true;
-              break;
+      for (let i = 0; i < 10; i++) {
+        if (radioButtonSelection[i].checked) {
+          if (i != 9) {
+            radioButtonSelection[i + 1].checked = true;
+            break;
+          }
         }
       }
+    } else if (event.code == 'ArrowDown' || event.code == 'NumpadSubtract' || event.code == 'Minus') {
+      for (let i = 0; i < 10; i++) {
+        if (radioButtonSelection[i].checked) {
+          if (i != 0) {
+            radioButtonSelection[i - 1].checked = true;
+            break;
+          }
+        }
+      }
+    }
+    volumeSelection();
   }
 }
-  volumeSelection();
+
+// Изменение громкости горячими клавишами 0-9 Digit и Numpad
+function volumeSelectionNumberHotKeys() {
+  if (hotVolumeKeysDigits.includes(event.code)) {
+    radioButtonSelection[hotVolumeKeysDigits.indexOf(event.code)].checked = true;
+    volumeSelection();
+  } else if (hotVolumeKeysNums.includes(event.code)) {
+    radioButtonSelection[hotVolumeKeysNums.indexOf(event.code)].checked = true;
+    volumeSelection();
+  }
 }
-}
-
-
-
-
-
-
-
-
-
-
 
 // Звук щелчка при переключении громкости или смене гармошки
 function soundOfClick() {
@@ -350,12 +344,12 @@ function changeBackground(animationDirection) {
     backgroundDiv.prepend(newBackground);
     childrenIndex = 1;
   }
-    backgroundDiv.children[0].classList.add(`bg${animationDirection}`);
+  backgroundDiv.children[0].classList.add(`bg${animationDirection}`);
 
   setTimeout(() => {
-      backgroundDiv.children[childrenIndex].remove();
-      backgroundDiv.children[0].classList.remove(`bg${animationDirection}`);
-    }, 500);
+    backgroundDiv.children[childrenIndex].remove();
+    backgroundDiv.children[0].classList.remove(`bg${animationDirection}`);
+  }, 500);
 }
 
 // Выбираем следующую гармошку
@@ -449,8 +443,9 @@ buttonsCreation();
 
 // Слушаем нажатие или отпускание клавиш
 document.addEventListener('keydown', buttonClick);
-document.addEventListener('keydown', volumeSelectionHotKeys);
 document.addEventListener('keyup', buttonUnclick);
+document.addEventListener('keydown', volumeSelectionHotKeys);
+document.addEventListener('keydown', volumeSelectionNumberHotKeys);
 
 // Задаем радиокнопку по умолчанию
 let selectedRadioButtonIndex = 4;
