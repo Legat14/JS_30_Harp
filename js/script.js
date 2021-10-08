@@ -186,9 +186,7 @@ function buttonClick() {
       }
 
       holes.children[hole - 1].style.backgroundImage = `url("img/hole_${direction}.png")`; // Меняем отображение отверстия на нажатое
-      // В зависимости от направления воздуха
-      holes.children[hole - 1].childNodes[0].style.marginTop = '-1px'; // Сдвигаем цифру вслед за отверстием
-      holes.children[hole - 1].childNodes[0].style.marginLeft = '1px';
+                                                                                          // В зависимости от направления воздуха
     }
   }
 }
