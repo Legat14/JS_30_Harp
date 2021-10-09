@@ -1,7 +1,82 @@
 body {
   margin: 0px;
   display: flex;
+  flex-direction: column;
   overflow: hidden;
+}
+
+header {
+  width: 57%;
+  margin-top: 125px;
+  margin-left: 0px;
+  position: absolute;
+  display: flex;
+  justify-content: right;
+  -moz-user-select: none; /* Исключаем возможность случайно выделить буквы на кнопке */
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+h1 {
+  margin: 0px;
+  transform: rotate(-7deg);
+  color: #e6e6e6;
+  font-family: 'Akronim', cursive;
+  font-size: 90px;
+  font-weight: 400;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  margin: 830px 0px 0px;
+  justify-self: end;
+  z-index: 1;
+  display: flex;
+}
+
+.footerContacts {
+  width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 40px 40px 0px 0px;
+}
+
+.footerDiv {
+  display: flex;
+}
+
+.footerDivDiv {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerDivDiv div {
+  display: flex;
+}
+
+footer p {
+  margin: 8px 0px 8px 15px;
+  color: #ffffff;
+  font-family: 'Gemunu Libre', sans-serif;
+  font-size: 27px;
+  font-weight: 300;
+  font-style: oblique;
+}
+
+.blueText {
+  margin-left: 12px;
+  color: #b0e6ff;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+  justify-items: center;
 }
 
 .backgroundConteiner {
@@ -47,7 +122,7 @@ body {
   }
 }
 
-.highlight { /* Центральный блок с картинкой и кнопками */
+.highlight { /* Центральный блок с кнопками */
   width: 1100px;
   height: 700px;
   padding: 0px;
