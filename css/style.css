@@ -27,6 +27,16 @@ h1 {
   font-weight: 400;
 }
 
+h2 {
+  width: 112px;
+  height: 40px;
+  margin: auto;
+  color: #ffffff;
+  font-family: 'Gemunu Libre', sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+}
+
 footer {
   width: 100%;
   position: absolute;
@@ -42,21 +52,28 @@ footer {
   display: flex;
   justify-content: space-evenly;
   background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ffffff;
   border-radius: 40px 40px 0px 0px;
 }
 
-.footerDiv {
+.footer-div {
   display: flex;
 }
 
-.footerDivDiv {
+.footer-div-div {
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
 
-.footerDivDiv div {
+.footer-div-div div {
   display: flex;
+}
+
+.footer-img-div {
+  margin-left: -30px;
+  margin-right: -20px;
+  transform: scale(60%);
 }
 
 footer p {
@@ -79,7 +96,7 @@ footer a {
   justify-items: center;
 }
 
-.backgroundConteiner {
+.background-conteiner {
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -123,17 +140,82 @@ footer a {
 }
 
 .highlight { /* Центральный блок с кнопками */
+  position: relative;
   width: 1100px;
   height: 700px;
   padding: 0px;
   margin: auto;
   margin-top: 90px;
-  position: relative;
   background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ffffff;
   border-radius: 40px;
 }
 
-.noteButtons { /* Класс для невидимой формы, в которой находятся все кнопки */
+.aside-div {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.aside-img-div {
+  width: auto;
+  height: auto;
+  transform: scale(60%) rotate(270deg);
+}
+
+#hotkey-panel { /* Боковая панель с горячими клавишами */
+  position:absolute;
+  width: 368px;
+  height: 700px;
+  padding: 0px;
+  margin: 90px 0px 300px 1550px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ffffff;
+  border-radius: 40px 0px 0px 40px;
+}
+
+table {
+  margin-bottom: 15px;
+  font-family: 'Gemunu Libre', sans-serif;
+  font-size: 25px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-collapse: collapse;
+}
+
+th, td:first-child {
+  width: auto;
+  font-size: 25px;
+  font-weight: 600;
+  color: #000000;
+  background-color: #f0b05c;
+  border: 1px solid #ffffff;
+}
+
+td {
+  width: auto;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.side-panel-holes {
+  font-size: 19px;
+}
+
+.hot-key-row {
+  font-size: 19px;
+}
+
+aside p {
+  padding-left: 20px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.note-buttons { /* Класс для невидимой формы, в которой находятся все кнопки */
   display: block;
 }
 
@@ -246,7 +328,7 @@ button:focus {
   user-select: none;
 }
 
-.changeHarpButtons {
+.change-harp-buttons {
   position: absolute;
   top: 240px;
   right: 60px;
@@ -255,7 +337,7 @@ button:focus {
   align-items: center;
 }
 
-.changeHarpButton {
+.change-harp-button {
   width: 65px;
   height: 28px;
   padding: 0;
@@ -269,23 +351,23 @@ button:focus {
   cursor: pointer;
 }
 
-.changeHarpButtonDown {
+.change-harp-button-down {
   transform: rotate(180deg);
 }
 
 /* Нажатие на стрелочку */
-.changeHarpButton:active {
+.change-harp-button:active {
   background-size: 60px 24px;
 }
 
 /* Выделение стрелочки */
-.changeHarpButton:hover {
+.change-harp-button:hover {
   background-image: url("../img/change_button_hover.png");
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-.changeHarpButtons p {
+.change-harp-buttons p {
   margin: 0px 0px 6px;
   font-family: 'Gemunu Libre', sans-serif;
   font-size: 25px;
@@ -297,7 +379,7 @@ button:focus {
   user-select: none;
 }
 
-.changeHarpShow {
+.change-harp-show {
   width: 55px;
   height: 55px;
   margin-top: 20px;
@@ -313,7 +395,7 @@ button:focus {
   border-radius: 15px;
 }
 
-.changeHarpShow p {
+.change-harp-show p {
   margin: 0px;
   font-size: 42px;
   font-weight: 300;

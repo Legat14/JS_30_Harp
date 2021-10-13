@@ -245,7 +245,7 @@ function volumeSelection() {
   radioButtonSelection.forEach((element, i) => {
     if (radioButtonSelection[i].checked) {
       playVolume = radioButtonSelection[i].value;
-      console.clear();
+      //console.clear();
       console.log('Volume level - ', i + 1);
       for (let j = i; j < 10; j++) {
         document.body.children[1].children[1].children[j].children[1].style.backgroundColor = "";
@@ -361,6 +361,7 @@ function changeButtonUpClick() {
     buttonsCreation(animationDirection);
     soundOfClick();
     changeBackground(animationDirection);
+    hotKeysTable();
     console.clear();
     console.log('Selected harmonica - ', harpType);
   }
@@ -377,6 +378,7 @@ function changeButtonDownClick() {
     buttonsCreation(animationDirection);
     soundOfClick();
     changeBackground(animationDirection);
+    hotKeysTable();
     console.clear();
     console.log('Selected harmonica - ', harpType);
   }
@@ -418,7 +420,7 @@ function buttonsRemove() {
 
 // Прописываем ключ выбранной гармошки
 function showHarpChoice(animationDirection) {
-  const harpWindow = document.querySelector('.changeHarpShow');
+  const harpWindow = document.querySelector('.change-harp-show');
   if (harpWindow.children[0]) {
     harpWindow.children[0].classList.add(`remove${animationDirection}`);
     setTimeout(() => {
@@ -436,6 +438,26 @@ function showHarpChoice(animationDirection) {
 
 // Запускаем функцию создания кнопок при загрузке страницы для создания кнопок гармошки по умолчанию
 buttonsCreation();
+
+// Заполняем таблицу хоткеями в зависимости от выбранной гармошки
+function hotKeysTable() {
+  let currentRow;
+  for (let i = 0; i < 32; i++) {
+    if (i < 10) {
+      currentRow = document.getElementById('hot-key-row-1');
+      currentRow.children[i + 1].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+  } else if (i < 21) {
+    currentRow = document.getElementById('hot-key-row-2');
+    currentRow.children[i + 1 - 10].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+} else {
+  currentRow = document.getElementById('hot-key-row-3');
+  currentRow.children[i + 1 - 21].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+}
+}
+}
+
+// Прописываем горячие клавиши в таблице при запуске программы
+hotKeysTable();
 
 // Слушаем события
 
@@ -464,7 +486,7 @@ radioButtonSelection.forEach((element, i) => {
 });
 
 // Выбираем кнопки смены гармошки
-const changeHarpButtonSelection = document.querySelectorAll('.changeHarpButton');
+const changeHarpButtonSelection = document.querySelectorAll('.change-harp-button');
 
 // Слушаем клики мыши по кнопкам смены гармошки
 changeHarpButtonSelection[0].addEventListener('mousedown', changeButtonUpClick);

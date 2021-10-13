@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Akronim&family=Gemunu+Libre:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Akronim&family=Gemunu+Libre:wght@300;600&family=Nanum+Gothic&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class = "backgroundConteiner">
+    <div class = "background-conteiner">
         <div class = "background"></div>
     </div>
+
     <section class="highlight">
-        <form class="noteButtons">
+        <form class="note-buttons">
         </form>
         <form class="volumeButtons">
             <label>
@@ -62,11 +63,11 @@
             </label>
             <p>Vol.</p>
         </form>
-        <form class = "changeHarpButtons">
-            <button class = "changeHarpButton changeHarpButtonUp" type = "button"></button>
-            <div class = "changeHarpShow"></div>
+        <form class = "change-harp-buttons">
+            <button class = "change-harp-button" type = "button"></button>
+            <div class = "change-harp-show"></div>
             <p>Harp</p>
-            <button class = "changeHarpButton changeHarpButtonDown" type = "button"></button>
+            <button class = "change-harp-button change-harp-button-down" type = "button"></button>
         </form>
         <div class = "holes">
             <div><p>1</p></div>
@@ -81,14 +82,161 @@
             <div><p>10</p></div>
         </div>
     </section>
-    <script src="js/script.js"></script>
+
     <header>
         <h1>Harmonica on-line</h1>
     </header>
+    
+    <aside id = "hotkey-panel">
+        <div class = "aside-div">
+                <div class = "aside-img-div">
+                    <img src = "img/change_button.png" alt = "collapse" width = "65px" height = "28px">
+                </div>
+            <h2>Hotkeys</h2>
+        </div>
+        <table>
+            <thead>
+                <th>Key</th>
+                <th>z</th>
+                <th>x</th>
+                <th>c</th>
+                <th>v</th>
+                <th>b</th>
+                <th>n</th>
+                <th>m</th>
+                <th>,</th>
+                <th>.</th>
+                <th>/</th>
+            </thead>
+            <tr class = "side-panel-holes">
+                <td>Hole</td>
+                <td>+1</td>
+                <td>--1</td>
+                <td>-1</td>
+                <td>+2</td>
+                <td>---2</td>
+                <td>--2</td>
+                <td>-2</td>
+                <td>+3</td>
+                <td>----3</td>
+                <td>---3</td>
+            </tr>
+            <tr class = "hot-key-row" id = "hot-key-row-1">
+                <td>Note</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <table>
+            <thead>
+                <th>Key</th>
+                <th>a</th>
+                <th>s</th>
+                <th>d</th>
+                <th>f</th>
+                <th>g</th>
+                <th>h</th>
+                <th>j</th>
+                <th>k</th>
+                <th>l</th>
+                <th>;</th>
+                <th>'</th>
+            </thead>
+            <tr class = "side-panel-holes">
+                <td>Hole</td>
+                <td>--3</td>
+                <td>-3</td>
+                <td>+4</td>
+                <td>--4</td>
+                <td>-4</td>
+                <td>+5</td>
+                <td>-5</td>
+                <td>+6</td>
+                <td>--6</td>
+                <td>-6</td>
+                <td>-7</td>
+            </tr>
+            <tr class = "hot-key-row" id = "hot-key-row-2">
+                <td>Note</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <table>
+            <thead>
+                <th>Key</th>
+                <th>q</th>
+                <th>w</th>
+                <th>e</th>
+                <th>r</th>
+                <th>t</th>
+                <th>y</th>
+                <th>u</th>
+                <th>i</th>
+                <th>o</th>
+                <th>p</th>
+                <th>[</th>
+            </thead>
+            <tr class = "side-panel-holes">
+                <td>Hole</td>
+                <td>+7</td>
+                <td>-8</td>
+                <td>++8</td>
+                <td>+8</td>
+                <td>-9</td>
+                <td>++9</td>
+                <td>+9</td>
+                <td>-10</td>
+                <td>+++10</td>
+                <td>++10</td>
+                <td>+10</td>
+            </tr>
+            <tr class = "hot-key-row" id = "hot-key-row-3">
+                <td>Note</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <p>
+            Press &uarr; and &darr; or + and - or numbers from 0 to 9 to set up the volume (0 - max volume)
+        </p>
+    </aside>
+
     <footer>
         <div class = "footerContacts">
-            <div class = "footerDiv">
-                <div class="footerDivDiv">
+            <div class = "footer-div">
+                <div class = "footer-div-div footer-img-div">
+                    <img src = "img/change_button.png" alt = "collapse" width = "65px" height = "28px">
+                </div>
+                <div class="footer-div-div">
                     <div>
                         <p>Program name: </p>
                         <p class = "blueText">Harmonica on-line</p>
@@ -98,7 +246,7 @@
                         <p class = "blueText">1.0</p>
                     </div>
                 </div>
-                <div class="footerDivDiv">
+                <div class="footer-div-div">
                     <div>
                         <p>Dev.:</p>
                         <p class = "blueText">Ivan Zotov</p>
@@ -108,7 +256,7 @@
                         <p class = "blueText">zia-d@mail.ru</p>
                     </div>
                 </div>
-                <div class="footerDivDiv">
+                <div class="footer-div-div">
                     <div>
                         <p>Discord:</p>
                         <p class = "blueText">Legat_14#4474</p>
@@ -118,6 +266,7 @@
             <a href = "https://github.com/Legat14"><img src="/img/git.png" alt="Git" width = "50" height = "50"></a>
         </div>
     </footer>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
