@@ -143,9 +143,9 @@ function buttonClick() {
   if (!event.repeat) { // Если событие уже запущено, то оно не повторяется
     // Это нужно для того, чтобы избежать многократного проигрывания звука при зажатой клавише
 
-    if ((hotKeys.includes(event.code) == true && event.type == 'keydown') || (event.type == 'mousedown' && event.which == 1)) {
-      // Звук должен заиграть только при нажатии определенной клавиши или щелчка левой кнопкой
-      // мыши по кнопке ноты
+    if ((hotKeys.includes(event.code) == true && event.type == 'keydown' && !event.shiftKey && !event.ctrlKey && !event.altKey) || (event.type == 'mousedown' && event.which == 1)) {
+      // Звук должен заиграть только при нажатии определенной клавиши без зажатых Alt, Shift или Ctrl
+      // или щелчка левой кнопкой мыши по кнопке ноты
 
       let i = 0;
       if (event.type == 'mousedown' && event.which == 1) {
