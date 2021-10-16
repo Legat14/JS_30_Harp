@@ -459,6 +459,95 @@ function hotKeysTable() {
 // Прописываем горячие клавиши в таблице при запуске программы
 hotKeysTable();
 
+// Выбираем боковую панель
+const hotkeyPanel = document.getElementById('hotkey-panel');
+
+// Выбираем начальное положение боковой панели
+let hotkeyPanelCollapsed = false;
+
+// Сворачиваем боковую панель
+function hotkeyPanelCollapse () {
+  soundOfClick();
+  if (hotkeyPanelCollapsed == false) {
+    hotkeyPanelCollapsed = true;
+    hotkeyPanel.style.left = '1870px';
+    hotkeyPanel.style.height = '70px';
+    hotkeyPanel.style.borderRadius = '20px';
+    hotkeyPanel.children[1].style.display = 'none';
+    hotkeyPanel.children[2].style.display = 'none';
+    hotkeyPanel.children[3].style.display = 'none';
+    hotkeyPanel.children[4].style.display = 'none';
+    hotkeyPanelCollapseButton.style.transform = 'rotate(270deg)';
+  } else {
+    hotkeyPanelCollapsed = false;
+    hotkeyPanel.style.left = '';
+    hotkeyPanel.style.height = '';
+    hotkeyPanel.style.borderRadius = '';
+    hotkeyPanel.children[1].style.display = '';
+    hotkeyPanel.children[2].style.display = '';
+    hotkeyPanel.children[3].style.display = '';
+    hotkeyPanel.children[4].style.display = '';
+    hotkeyPanelCollapseButton.style.transform = '';
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Выбираем футер
+const footer = document.querySelector('footer');
+
+// Выбираем начальное положение футера
+let footerCollapsed = false;
+
+// Сворачиваем футер
+function footerCollapse () {
+  soundOfClick();
+  if (footerCollapsed == false) {
+    footerCollapsed = true;
+    footer.style.top = '880px';
+    footer.children[0].style.width = '70px';
+    footer.children[0].style.marginLeft = '420px';
+    footer.children[0].style.borderRadius = '20px';
+    footer.children[0].children[0].children[1].style.display = 'none';
+    footer.children[0].children[0].children[2].style.display = 'none';
+    footer.children[0].children[0].children[3].style.display = 'none';
+    footer.children[0].children[1].style.display = 'none';
+    footerCollapseButton.style.transform = 'rotate(0deg)';
+    footerCollapseButton.style.height = '50px';
+  } else {
+    footerCollapsed = false;
+    footer.style.top = '';
+    footer.children[0].style.width = '';
+    footer.children[0].style.marginLeft = '';
+    footer.children[0].style.borderRadius = '';
+    footer.children[0].children[0].children[1].style.display = '';
+    footer.children[0].children[0].children[2].style.display = '';
+    footer.children[0].children[0].children[3].style.display = '';
+    footer.children[0].children[1].style.display = '';
+    footerCollapseButton.style.transform = '';
+    footerCollapseButton.style.height = '';
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 // Слушаем события
 
 // Слушаем нажатие или отпускание клавиш
@@ -491,3 +580,15 @@ const changeHarpButtonSelection = document.querySelectorAll('.change-harp-button
 // Слушаем клики мыши по кнопкам смены гармошки
 changeHarpButtonSelection[0].addEventListener('mousedown', changeButtonUpClick);
 changeHarpButtonSelection[1].addEventListener('mousedown', changeButtonDownClick);
+
+// Выбираем кнопку коллапса боковой панели
+const hotkeyPanelCollapseButton = document.querySelector('.hotkey-panel-collapse-button');
+
+// Слушаем щелчок по кнопке коллапса боковой панели
+hotkeyPanelCollapseButton.addEventListener('mousedown', hotkeyPanelCollapse);
+
+// Выбираем кнопку коллапса футера
+const footerCollapseButton = document.querySelector('.footer-collapse-button');
+
+// Слушаем щелчок по кнопке коллапса футера
+footerCollapseButton.addEventListener('mousedown', footerCollapse);

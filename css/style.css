@@ -1,3 +1,28 @@
+/* Добавляем локальные шрифты */
+
+@font-face {
+  font-family: Akronim;
+  src: url(../fonts/Akronim-Regular.ttf);
+}
+
+@font-face {
+  font-family: Gemunu Libre;
+  src: url(../fonts/GemunuLibre-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Gemunu Libre;
+  src: url(../fonts/GemunuLibre-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Nanum Gothic;
+  src: url(../fonts/NanumGothic-Regular.ttf);
+}
+
+
 body {
   margin: 0px;
   display: flex;
@@ -39,8 +64,10 @@ h2 {
 
 footer {
   width: 100%;
+  height: 100px;
   position: absolute;
-  margin: 830px 0px 0px;
+  top: 830px;
+  margin: 0px;
   justify-self: end;
   z-index: 1;
   display: flex;
@@ -68,12 +95,6 @@ footer {
 
 .footer-div-div div {
   display: flex;
-}
-
-.footer-img-div {
-  margin-left: -30px;
-  margin-right: -20px;
-  transform: scale(60%);
 }
 
 footer p {
@@ -155,20 +176,46 @@ footer a {
   margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
+  align-items: center;
 }
 
-.aside-img-div {
-  width: auto;
-  height: auto;
-  transform: scale(60%) rotate(270deg);
+.collapse-button {
+  background-image: url("../img/change_button.png");
+  background-size: 39px 17px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+}
+
+.hotkey-panel-collapse-button {
+  margin-left: 10px;
+  width: 39px;
+  height: 18px;
+  transform: rotate(90deg);
+}
+
+.footer-collapse-button {
+  margin-top: 20px;
+  width: 39px;
+  height: 17px;
+  transform: rotate(180deg);
+}
+
+.collapse-button:hover {
+  background-image: url("../img/change_button_hover.png");
+}
+
+.collapse-button:active {
+  background-size: 36px 14px;
 }
 
 #hotkey-panel { /* Боковая панель с горячими клавишами */
   position:absolute;
   width: 368px;
   height: 700px;
+  top: 90px;
+  left: 1550px;
   padding: 0px;
-  margin: 90px 0px 300px 1550px;
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.6);
@@ -347,7 +394,6 @@ button:focus {
   background-size: 65px 28px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-repeat: no-repeat;
   cursor: pointer;
 }
 
