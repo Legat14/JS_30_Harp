@@ -273,9 +273,8 @@ function volumeSelection() {
 
 // Изменение громкости горячими клавишами + / - и стрелками
 function volumeSelectionHotKeys() {
-  if (event.code == 'ArrowUp' || event.code == 'NumpadAdd' || event.code == 'Equal' || event.code == 'ArrowDown' ||
-    event.code == 'NumpadSubtract' || event.code == 'Minus') {
-    if (event.code == 'ArrowUp' || event.code == 'NumpadAdd' || event.code == 'Equal') {
+  if (event.code == 'NumpadAdd' || event.code == 'Equal' || event.code == 'NumpadSubtract' || event.code == 'Minus') {
+    if (event.code == 'NumpadAdd' || event.code == 'Equal') {
       for (let i = 0; i < 10; i++) {
         if (radioButtonSelection[i].checked) {
           if (i != 9) {
@@ -284,7 +283,7 @@ function volumeSelectionHotKeys() {
           }
         }
       }
-    } else if (event.code == 'ArrowDown' || event.code == 'NumpadSubtract' || event.code == 'Minus') {
+    } else if (event.code == 'NumpadSubtract' || event.code == 'Minus') {
       for (let i = 0; i < 10; i++) {
         if (radioButtonSelection[i].checked) {
           if (i != 0) {
@@ -335,7 +334,7 @@ function changeBackground(animationDirection) {
   newBackground.classList.add('background');
   newBackground.style.backgroundImage = `url("img/bg/harmonica_bg_${harpTypeIndex}.jpg`;
   let childrenIndex;
-  if (animationDirection == "Up") {
+  if (animationDirection == 'Up') {
     backgroundDiv.append(newBackground);
     childrenIndex = 0;
   } else {
@@ -348,6 +347,15 @@ function changeBackground(animationDirection) {
     backgroundDiv.children[childrenIndex].remove();
     backgroundDiv.children[0].classList.remove(`bg${animationDirection}`);
   }, 500);
+}
+
+// Меняем гармошку нажатием на стрелки вверх или вниз
+function volumeSelectionArrowKeys() {
+  if (event.code == 'ArrowUp') {
+    changeButtonUpClick();
+  } else if (event.code == 'ArrowDown') {
+    changeButtonDownClick();
+  }
 }
 
 // Выбираем следующую гармошку
@@ -466,7 +474,7 @@ const hotkeyPanel = document.getElementById('hotkey-panel');
 let hotkeyPanelCollapsed = false;
 
 // Сворачиваем боковую панель
-function hotkeyPanelCollapse () {
+function hotkeyPanelCollapse() {
   soundOfClick();
   if (hotkeyPanelCollapsed == false) {
     hotkeyPanelCollapsed = true;
@@ -477,6 +485,8 @@ function hotkeyPanelCollapse () {
     hotkeyPanel.children[2].style.display = 'none';
     hotkeyPanel.children[3].style.display = 'none';
     hotkeyPanel.children[4].style.display = 'none';
+    hotkeyPanel.children[5].style.display = 'none';
+    hotkeyPanel.children[6].style.display = 'none';
     hotkeyPanelCollapseButton.style.transform = 'rotate(270deg)';
   } else {
     hotkeyPanelCollapsed = false;
@@ -487,20 +497,18 @@ function hotkeyPanelCollapse () {
     hotkeyPanel.children[2].style.display = '';
     hotkeyPanel.children[3].style.display = '';
     hotkeyPanel.children[4].style.display = '';
+    hotkeyPanel.children[5].style.display = '';
+    hotkeyPanel.children[6].style.display = '';
     hotkeyPanelCollapseButton.style.transform = '';
   }
 }
 
-
-
-
-
-
-
-
-
-
-
+// Сворачиваем боковую панель по нажатию на стрелочку вправо
+function hotkeyPanelCollapseHotkey() {
+  if (event.code == 'ArrowRight') {
+    hotkeyPanelCollapse();
+  }
+}
 
 // Выбираем футер
 const footer = document.querySelector('footer');
@@ -509,7 +517,7 @@ const footer = document.querySelector('footer');
 let footerCollapsed = false;
 
 // Сворачиваем футер
-function footerCollapse () {
+function footerCollapse() {
   soundOfClick();
   if (footerCollapsed == false) {
     footerCollapsed = true;
@@ -538,15 +546,20 @@ function footerCollapse () {
   }
 }
 
+// Сворачиваем футер по нажатию на стрелочку вниз
+function footerCollapseHotkey() {
+  if (event.code == 'ArrowLeft') {
+    footerCollapse();
+  }
+}
 
-
-
-
-
-
-
-
-
+// Сворачиваем все панели
+function allPanelCollapseHotkey() {
+  if (event.code == 'Space') {
+    hotkeyPanelCollapse();
+    footerCollapse();
+  }
+}
 
 // Слушаем события
 
@@ -555,6 +568,10 @@ document.addEventListener('keydown', buttonClick);
 document.addEventListener('keyup', buttonUnclick);
 document.addEventListener('keydown', volumeSelectionHotKeys);
 document.addEventListener('keydown', volumeSelectionNumberHotKeys);
+document.addEventListener('keydown', volumeSelectionArrowKeys);
+document.addEventListener('keydown', hotkeyPanelCollapseHotkey);
+document.addEventListener('keydown', footerCollapseHotkey);
+document.addEventListener('keydown', allPanelCollapseHotkey);
 
 // Задаем радиокнопку по умолчанию
 let selectedRadioButtonIndex = 4;
