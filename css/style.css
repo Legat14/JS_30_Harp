@@ -75,6 +75,7 @@ footer {
 
 .footerContacts {
   width: 1100px;
+  height: 300px;
   margin: auto;
   display: flex;
   justify-content: space-evenly;
@@ -112,8 +113,9 @@ footer p {
 }
 
 footer a {
+  margin-top: 30px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-items: center;
 }
 
@@ -133,6 +135,7 @@ footer a {
 }
 
 .bgUp {
+  transition-timing-function: ease-in-out;
   animation-duration: 0.5s;
   animation-name: bgUp;
 }
@@ -147,6 +150,7 @@ footer a {
 }
 
 .bgDown {
+  transition-timing-function: ease-in-out;
   animation-duration: 0.5s;
   animation-name: bgDown;
 }

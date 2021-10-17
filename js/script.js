@@ -346,7 +346,8 @@ function changeBackground(animationDirection) {
   setTimeout(() => {
     backgroundDiv.children[childrenIndex].remove();
     backgroundDiv.children[0].classList.remove(`bg${animationDirection}`);
-  }, 500);
+  }, 490); // Удаление класса сделано раньше конца анимации, чтобы избежать мелькания предыдущего фона на мгновенье
+  // При переключении вверх, если анимация заканчивалась чуть раньше, предыдущая картинка возвращалась на свое место, а потом удалялась
 }
 
 // Меняем гармошку нажатием на стрелки вверх или вниз
