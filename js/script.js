@@ -92,6 +92,11 @@ const wayToGetNote = ['+1', '--1', '-1', '+2', '---2', '--2', '-2', '+3', '----3
   '+6', '--6', '-6', '-7', '+7', '-8', '++8', '+8', '-9', '++9', '+9', '-10', '+++10', '++10', '+10'
 ];
 
+// Задаем начальное значение для каждой горячей клавиши - нажата или нет (нужно для устранения бага с повторяющимися нотами)
+let hotKeyPressed = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+];
+
 // Назначаем соответствие между горячими цифровыми клавишами и уровнем звука
 const hotVolumeKeysDigits = ['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', ];
 const hotVolumeKeysNums = ['Numpad1', 'Numpad2', 'Numpad3', 'Numpad4', 'Numpad5', 'Numpad6', 'Numpad7', 'Numpad8', 'Numpad9', 'Numpad0', ];
@@ -144,7 +149,7 @@ function buttonClick() {
     // Это нужно для того, чтобы избежать многократного проигрывания звука при зажатой клавише
 
     if ((hotKeys.includes(event.code) == true && event.type == 'keydown' && !event.shiftKey && !event.ctrlKey && !event.altKey) ||
-    (event.type == 'mousedown' && event.which == 1)) {
+      (event.type == 'mousedown' && event.which == 1)) {
       // Звук должен заиграть только при нажатии определенной клавиши без зажатых Alt, Shift или Ctrl
       // или щелчка левой кнопкой мыши по кнопке ноты
 
@@ -163,6 +168,7 @@ function buttonClick() {
       }
 
       // Создаем автоматически проигрываемый звук в html
+      if (event.type == 'mousedown' || !hotKeyPressed[i]) {
       const playNote = document.createElement('audio');
       playNote.setAttribute('data-hole-number', i); // Помечаем каждый звук своим уникальным атрибутом
       playNote.setAttribute('src', `sounds/${harpNotes[i]}.mp3`);
@@ -170,6 +176,8 @@ function buttonClick() {
       playNote.setAttribute('autoplay', '');
       playNote.volume = playVolume;
       document.body.append(playNote);
+      hotKeyPressed[i] = true;
+      }
 
       buttonSelection[i].style.backgroundImage = 'url("img/button_pressed.png")'; // Меняем отображение кнопки на нажатую кнопку
       buttonSelection[i].style.paddingTop = '5px'; // Сдвигаем букву вслед за кнопкой
@@ -188,7 +196,7 @@ function buttonClick() {
       }
 
       holes.children[hole - 1].style.backgroundImage = `url("img/hole_${direction}.png")`; // Меняем отображение отверстия на нажатое
-                                                                                          // В зависимости от направления воздуха
+      // В зависимости от направления воздуха
     }
   }
 }
@@ -226,6 +234,7 @@ function buttonUnclick() { // Удаляем звуки из html при отп�
     } else if (hotKeys.includes(event.code) == true && event.type == 'keyup') {
       // Находим индекс кнопки, которую нажали с помощью горячей клавиши
       i = hotKeys.indexOf(event.code);
+      hotKeyPressed[i] = false;
     }
 
     // При таком удалении аудио удаляется именно тот звук, который был "отпущен"
@@ -238,11 +247,11 @@ function buttonUnclick() { // Удаляем звуки из html при отп�
         if (audioSelection[j].getAttribute('data-hole-number') == i) {
           break;
         }
+      }
+      if (audioSelection[j]) {
+        audioSelection[j].remove();
+      }
     }
-    if (audioSelection[j]) {
-    audioSelection[j].remove();
-    }
-  }
 
     buttonSelection[i].style.backgroundImage = ''; // При отпускании кнопки изображение меняется обратно на ненажатую кнопку
     buttonSelection[i].style.paddingLeft = ''; // Сдвигаем букву на место
@@ -263,7 +272,7 @@ function volumeSelection() {
   radioButtonSelection.forEach((element, i) => {
     if (radioButtonSelection[i].checked) {
       playVolume = radioButtonSelection[i].value;
-      console.clear();
+//      console.clear();
       console.log('Volume level - ', i + 1);
       for (let j = i; j < 10; j++) {
         document.body.children[1].children[1].children[j].children[1].style.backgroundColor = "";
@@ -473,14 +482,14 @@ function hotKeysTable() {
     if (i < 10) {
       currentRow = document.getElementById('hot-key-row-1');
       currentRow.children[i + 1].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
-  } else if (i < 21) {
-    currentRow = document.getElementById('hot-key-row-2');
-    currentRow.children[i + 1 - 10].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
-} else {
-  currentRow = document.getElementById('hot-key-row-3');
-  currentRow.children[i + 1 - 21].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
-}
-}
+    } else if (i < 21) {
+      currentRow = document.getElementById('hot-key-row-2');
+      currentRow.children[i + 1 - 10].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+    } else {
+      currentRow = document.getElementById('hot-key-row-3');
+      currentRow.children[i + 1 - 21].innerHTML = harpNotes[i].slice(0, harpNotes[i].length - 1);
+    }
+  }
 }
 
 // Прописываем горячие клавиши в таблице при запуске программы
