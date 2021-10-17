@@ -143,7 +143,8 @@ function buttonClick() {
   if (!event.repeat) { // Если событие уже запущено, то оно не повторяется
     // Это нужно для того, чтобы избежать многократного проигрывания звука при зажатой клавише
 
-    if ((hotKeys.includes(event.code) == true && event.type == 'keydown' && !event.shiftKey && !event.ctrlKey && !event.altKey) || (event.type == 'mousedown' && event.which == 1)) {
+    if ((hotKeys.includes(event.code) == true && event.type == 'keydown' && !event.shiftKey && !event.ctrlKey && !event.altKey) ||
+    (event.type == 'mousedown' && event.which == 1)) {
       // Звук должен заиграть только при нажатии определенной клавиши без зажатых Alt, Shift или Ctrl
       // или щелчка левой кнопкой мыши по кнопке ноты
 
@@ -163,6 +164,7 @@ function buttonClick() {
 
       // Создаем автоматически проигрываемый звук в html
       const playNote = document.createElement('audio');
+      playNote.setAttribute('data-hole-number', i); // Помечаем каждый звук своим уникальным атрибутом
       playNote.setAttribute('src', `sounds/${harpNotes[i]}.mp3`);
       playNote.setAttribute('preload', '');
       playNote.setAttribute('autoplay', '');
@@ -191,7 +193,7 @@ function buttonClick() {
   }
 }
 
-function buttonUnclick() { // Удаляем все звуки из html при отпускании клавиши клавиатуры
+function buttonUnclick() { // Удаляем звуки из html при отпускании клавиши клавиатуры
   // Это нужно чтобы прервать проигрывание звука и не засорять html
 
   if ((hotKeys.includes(event.code) == true && event.type == 'keyup') || event.type == 'mouseout' || event.type == 'mouseup') {
@@ -207,10 +209,10 @@ function buttonUnclick() { // Удаляем все звуки из html при 
     // При таком удалении аудио удаляется только последнее аудио. Это позволяет играть быстро, но
     // есть баг - если нажать две или более кнопок и одну отпустить, то удалится первый нажаты звук
     // не зависимо от того, какая клавиша была отпущена
-    let audioSelection = document.querySelector('audio');
-    if (audioSelection != null) {
-      audioSelection.remove();
-    }
+    //let audioSelection = document.querySelector('audio');
+    //if (audioSelection != null) {
+    //  audioSelection.remove();
+    //}
 
     let i = 0;
     if (event.type == 'mouseout' || event.type == 'mouseup') {
@@ -225,6 +227,22 @@ function buttonUnclick() { // Удаляем все звуки из html при 
       // Находим индекс кнопки, которую нажали с помощью горячей клавиши
       i = hotKeys.indexOf(event.code);
     }
+
+    // При таком удалении аудио удаляется именно тот звук, который был "отпущен"
+    let audioSelection = document.querySelectorAll('audio');
+    let j;
+    if (audioSelection.length != 0) {
+
+      // Находим значение уникального атрибута звука и сравниваем его с событием, чтобы узнать, этот ли звук "отпустили"
+      for (j = 0; j < audioSelection.length; j++) {
+        if (audioSelection[j].getAttribute('data-hole-number') == i) {
+          break;
+        }
+    }
+    if (audioSelection[j]) {
+    audioSelection[j].remove();
+    }
+  }
 
     buttonSelection[i].style.backgroundImage = ''; // При отпускании кнопки изображение меняется обратно на ненажатую кнопку
     buttonSelection[i].style.paddingLeft = ''; // Сдвигаем букву на место
@@ -245,7 +263,7 @@ function volumeSelection() {
   radioButtonSelection.forEach((element, i) => {
     if (radioButtonSelection[i].checked) {
       playVolume = radioButtonSelection[i].value;
-      //console.clear();
+      console.clear();
       console.log('Volume level - ', i + 1);
       for (let j = i; j < 10; j++) {
         document.body.children[1].children[1].children[j].children[1].style.backgroundColor = "";
